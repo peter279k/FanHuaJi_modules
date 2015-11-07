@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * This is a module for FanHuaJi.
+ * It's responsible for transforming generic words.
+ * @author 小斐 <admin@2d-gate.org>
+ */
+
 namespace XiaoFei\Fanhuaji\Module;
 
 use XiaoFei\Fanhuaji\Module\Helper\ModuleInterface;
@@ -38,6 +44,8 @@ class ProperNoun implements ModuleInterface {
         '(?<![山空幽稻五])[谷穀]歌'=>'Google',
         // japanese
         '有棲院'=>'有栖院',
+        '(?<![會才只本又還怎麼跟跑])來棲(?![息])'=>'來栖',
+        '栖([姬鬼艦])'=>'棲$1', // 艦隊Collection
         '麻枝準(?![備])'=>'麻枝准',
         // places: country
         '布[裡里列]塔'=>'不列顛',
@@ -50,6 +58,7 @@ class ProperNoun implements ModuleInterface {
         '指環王'=>'魔戒',
         '星球大戰'=>'星際大戰',
         '盜夢空間'=>'全面啟動',
+        '泰坦尼克號?'=>'鐵達尼號',
         // games
         '(?<![上的])求生之路(?![也越愈])'=>'惡靈勢力',
         '(?<![用靠著的])合金裝備'=>'潛龍諜影',
@@ -62,6 +71,7 @@ class ProperNoun implements ModuleInterface {
         '孤島危機'=>'末日之戰',
         '孤島驚魂'=>'極地戰嚎',
         '寂靜嶺'=>'沉默之丘',
+        '怪物獵人'=>'魔物獵人',
         '最終幻想'=>'太空戰士',
         '極品飛車'=>'極速快感',
         '泡泡堂'=>'爆爆王',
@@ -72,9 +82,12 @@ class ProperNoun implements ModuleInterface {
         '鈈'=>'鈽', '錇'=>'鉳', '鍀'=>'鎝', '鎄'=>'鑀', '鎇'=>'鋂',
         '鎿'=>'錼', '鐦'=>'鉲', '鑥'=>'鎦',
         // animes
+        '([a-z之的代]|自由|天帝|決鬥|暴風|瘟神|禁斷|神盾|侵略|電擊|攻擊|戰士|正義|雷鳥|陸戰|精靈|實驗|獨角獸?)(型)?[高敢]達'=>'$1$2鋼彈',
+        '[高敢]達([a-z動漫達玩系模公種之娘無玉石版板])'=>'鋼彈$1',
         '中華小(廚師|當家)'=>'中華一番',
         '全金屬狂潮'=>'驚爆危機',
         '千與千尋'=>'神隱少女',
+        '口袋(妖怪|怪[獸物])|寵物小精靈'=>'神奇寶貝',
         '寵物小精靈'=>'神奇寶貝',
         '數碼暴龍'=>'數碼寶貝',
         '浪客劍心'=>'神劍闖江湖',

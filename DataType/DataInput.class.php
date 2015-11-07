@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This class is the data unit used in Fanhuaji.
+ * @author 小斐 <admin@2d-gate.org>
+ */
+
 namespace XiaoFei\Fanhuaji\DataType;
 
 class DataInput {

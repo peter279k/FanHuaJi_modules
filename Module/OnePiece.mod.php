@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * This is a module for FanHuaJi.
+ * It's responsible for transforming words about OnePiece.
+ * @author 小斐 <admin@2d-gate.org>
+ */
+
 namespace XiaoFei\Fanhuaji\Module;
 
 use XiaoFei\Fanhuaji\Module\Helper\ModuleInterface;
