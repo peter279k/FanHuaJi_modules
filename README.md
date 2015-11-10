@@ -2,12 +2,12 @@
 
 2D-Gate 繁化姬：https://sctctw.2d-gate.org
 
-這個倉庫是「2D-Gate 繁化姬」中所使用的部分模組，你可以提交新的模組或是修正現有的模組。
+這個倉庫是「2D-Gate 繁化姬」中所使用的模組，你可以提交新的模組或是修正現有的模組。
 
 
 ## 環境要求
 
-PHP >= 5.6 推薦 PHP 7
+[PHP](http://php.net) ≥ 5.6 推薦 PHP 7
 
 
 ## 如何測試模組
@@ -74,7 +74,7 @@ string(63) "海賊王魯夫 海賊王魯夫 海賊王魯夫 海賊王魯夫 海�
 
 ## The MIT License (MIT)
 
-Copyright (c) 2015 小斐@2D-Gate
+Copyright (c) 2015 小斐@2D-Gate &lt;admin@2d-gate.org&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
