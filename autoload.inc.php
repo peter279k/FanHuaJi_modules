@@ -15,7 +15,7 @@ function load ($className) {
     if (strpos($className, PREFIX) !== 0) return false;
     stripPrefix($className);
     $incl_path = __DIR__;
-    $file_exts = '.php,.mod.php,.class.php';
+    $file_exts = '.php,.class.php';
     loader($incl_path, $className, $file_exts);
 }
 
