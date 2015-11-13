@@ -303,6 +303,7 @@ class Japanese implements ModuleInterface {
         '牛奶' => '牛乳',
         '花沢' => '花澤',
         '高中' => '高校',
+        '小姉' => '小姐',
     ];
 
     // constructor
