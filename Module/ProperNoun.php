@@ -18,13 +18,13 @@ class ProperNoun implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = array(
+    public $info = [
         'name' => '專有名詞',
         'desc' => '較具有通用性的人名、地名、片名、遊戲名等等…',
-    );
+    ];
 
     // if a English word writes in uppercase, we may consider it as a proper noun
-    private $convTable = array(
+    private $convTable = [
         // 人名
         '伯利茲'=>'貝里斯',
         '傅[里裡]葉'=>'傅立葉',
@@ -99,10 +99,10 @@ class ProperNoun implements ModuleInterface {
         '有棲院'=>'有栖院',
         '栖([姬鬼艦])'=>'棲$1', // 艦隊Collection
         '麻枝準(?![備])'=>'麻枝准',
-    );
+    ];
 
     public function load_or_not (ModuleAnalysis &$info) {
-        if (!in_array($info->to, array('tw'))) return false;
+        if (!in_array($info->to, ['tw'])) return false;
         return true;
     }
 

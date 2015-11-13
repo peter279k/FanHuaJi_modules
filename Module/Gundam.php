@@ -18,16 +18,16 @@ class Gundam implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = array(
+    public $info = [
         'name' => '鋼彈',
         'desc' => '日本動畫',
-    );
+    ];
 
     public function load_or_not (ModuleAnalysis &$info) {
-        if (!in_array($info->to, array('tw', 'hk'))) return false;
+        if (!in_array($info->to, ['tw', 'hk'])) return false;
         $cnt = 0;
         $threshold = 6;
-        $keywords = array('高達', '敢達', '鋼彈', '機動', '夏亞');
+        $keywords = ['高達', '敢達', '鋼彈', '機動', '夏亞'];
         foreach ($keywords as &$keyword) {
             $cnt += substr_count($info->texts['tc'], $keyword);
             if ($cnt > $threshold) return true;
@@ -48,15 +48,15 @@ class Gundam implements ModuleInterface {
     }
 
     public function conversion_table_hk () {
-        return array(
+        return [
             '鋼彈' => '高達',
-        );
+        ];
     }
 
     public function conversion_table_tw () {
-        return array(
+        return [
             '[高敢]達' => '鋼彈',
-        );
+        ];
     }
 
 }

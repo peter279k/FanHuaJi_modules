@@ -24,38 +24,38 @@ class Repeat implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = array(
+    public $info = [
         'name' => '重複字取代',
         'desc' => '功能類似這樣：「神...神~神─馬」→「什...什~什─麼」。容易被中斷的詞轉換可以透過此模組得到解決。',
-    );
+    ];
 
     // settings
     private $encoding = "UTF-8";
     private $context = 5; // check length for conditionRegex
     private $punctuationRegex = "/([\t 　,，.。…、!！?？~～\-─－☆★卍卐「」『』【】《》〈〉]+|[\\2a-z\d\\3]+)/uiS";
-    private $convTableBefore = array(
-        // search => array(replace, conditionRegex)
-        '草泥馬戈壁' => array('操你媽個屄', ''),
-        '草泥馬' => array('操你媽', '草泥馬(?!了)'),
-        '雅美蝶' => array('不要啊', ''),
-        '淡定' => array('冷靜', ''),
-        '神馬' => array('什麼', '(?<![匹眼眾諸死火風水雷])神馬'),
-        '臥槽' => array('我操', ''),
-        '家伙' => array('傢伙', ''),
-        '家夥' => array('傢伙', ''),
-        '傢夥' => array('傢伙', ''),
-        '石頭剪刀布' => array('剪刀石頭布', ''),
-        '石頭剪子布' => array('剪刀石頭布', ''),
-    );
-    private $convTableAfter = array(
-        // search => array(replace, conditionRegex)
-        '衝沖田' => array('沖沖田', ''),
-        '什嗎' => array('什麼', ''),
-        '鬆竹梅' => array('松竹梅', ''),
-    );
+    private $convTableBefore = [
+        // search => [replace, conditionRegex]
+        '草泥馬戈壁' => ['操你媽個屄', ''],
+        '草泥馬' => ['操你媽', '草泥馬(?!了)'],
+        '雅美蝶' => ['不要啊', ''],
+        '淡定' => ['冷靜', ''],
+        '神馬' => ['什麼', '(?<![匹眼眾諸死火風水雷])神馬'],
+        '臥槽' => ['我操', ''],
+        '家伙' => ['傢伙', ''],
+        '家夥' => ['傢伙', ''],
+        '傢夥' => ['傢伙', ''],
+        '石頭剪刀布' => ['剪刀石頭布', ''],
+        '石頭剪子布' => ['剪刀石頭布', ''],
+    ];
+    private $convTableAfter = [
+        // search => [replace, conditionRege]
+        '衝沖田' => ['沖沖田', ''],
+        '什嗎' => ['什麼', ''],
+        '鬆竹梅' => ['松竹梅', ''],
+    ];
 
     public function load_or_not (ModuleAnalysis &$info) {
-        if (!in_array($info->to, array('tw', 'hk'))) return false;
+        if (!in_array($info->to, ['tw', 'hk'])) return false;
         return true;
     }
 
@@ -64,7 +64,7 @@ class Repeat implements ModuleInterface {
     }
 
     public function conversion_table (ModuleAnalysis &$info) {
-        return array();
+        return [];
     }
 
     public function hookBefore_Hongkongize (DataInput &$in) { $this->_hookBefore($in); }
@@ -97,7 +97,7 @@ class Repeat implements ModuleInterface {
         $textSplitCnt = count($textSplit);
 
         // get text parts and merge them into a new string to $textNoSymbol
-        $textNoSymbol = array();
+        $textNoSymbol = [];
         for ($i=0; $i<$textSplitCnt; $i+=2) {
             $textNoSymbol[] = &$textSplit[$i];
         }

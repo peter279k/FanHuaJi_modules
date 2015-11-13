@@ -56,7 +56,7 @@ trait ModuleTrait {
      */
     private function removeOutliers (array $a, $magnitude=1) {
         $n = count($a);
-        if ($n === 0) return array();
+        if ($n === 0) return [];
         $mean = $this->average($a);
         // calculate standard deviation and times by magnitude
         $deviation = $this->standardDeviation($a) * $magnitude;

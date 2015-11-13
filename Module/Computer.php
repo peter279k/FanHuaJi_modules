@@ -18,13 +18,13 @@ class Computer implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = array(
+    public $info = [
         'name' => '電腦詞彙',
         'desc' => '可以用在應用程式的語系檔',
-    );
+    ];
 
     // http://jjhou.boolan.com/terms.htm
-    private $convTable = array(
+    private $convTable = [
         '(?<![寬恢])宏(?![大觀遠])' => '巨集',
         '[制製]表位' => '定位點',
         '[源原]碼' => '原始碼',
@@ -98,16 +98,16 @@ class Computer implements ModuleInterface {
         '頭文件' => '標頭檔',
         '畫格' => '幀',
         'IP(v[46])?地址' => 'IP$1位址',
-    );
+    ];
 
     public function load_or_not (ModuleAnalysis &$info) {
-        if (!in_array($info->to, array('tw', 'hk'))) return false;
+        if (!in_array($info->to, ['tw', 'hk'])) return false;
         $convTable = &$this->convTable;
         $text = &$info->texts['tc'];
         // remove all ASCII chars, leave Chinese chars
         $textChi = preg_replace('/[[:ascii:]]+/u', '', $text);
         // count all times of possible replacements
-        $cntArray = array();
+        $cntArray = [];
         foreach ($convTable as $cn => &$tw) {
             if ($this->isRegex($cn)) {
                 preg_match_all("/{$cn}/u", $textChi, $matches);

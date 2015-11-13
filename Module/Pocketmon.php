@@ -18,13 +18,13 @@ class Pocketmon implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = array(
+    public $info = [
         'name' => '神奇寶貝',
         'desc' => '日本動畫',
-    );
+    ];
 
     public function load_or_not (ModuleAnalysis &$info) {
-        if (!in_array($info->to, array('tw'))) return false;
+        if (!in_array($info->to, ['tw'])) return false;
         if (
             strpos($info->texts['tc'], '寵物小精靈') !== false ||
             strpos($info->texts['tc'], '小智') !== false ||
@@ -41,7 +41,7 @@ class Pocketmon implements ModuleInterface {
     }
 
     public function conversion_table (ModuleAnalysis &$info) {
-        return array(
+        return [
             '口袋(妖怪|怪[獸物])|(寵物)?小精靈|精靈寶可夢' => '神奇寶貝',
             '精靈球' => '寶貝球',
             '奇異種子' => '妙蛙種子',
@@ -155,7 +155,7 @@ class Pocketmon implements ModuleInterface {
             '多多冰' => '嘟嘟冰',
             '精靈球菇' => '寶貝球菇',
             '吊燈鬼' => '水晶燈火靈',
-        );
+        ];
     }
 
 }

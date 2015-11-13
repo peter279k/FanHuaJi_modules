@@ -18,17 +18,17 @@ class Naruto implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = array(
+    public $info = [
         'name' => '火影忍者',
         'desc' => '日本動畫',
-    );
+    ];
 
     public function load_or_not (ModuleAnalysis &$info) {
         // only works when convert to Transitional Chinese
-        if (!in_array($info->to, array('tw', 'hk'))) return false;
+        if (!in_array($info->to, ['tw', 'hk'])) return false;
         $cnt = 0;
         $threshold = 5;
-        $keywords = array('忍者', '鳴人', '佐助');
+        $keywords = ['忍者', '鳴人', '佐助'];
         foreach ($keywords as &$keyword) {
             $cnt += substr_count($info->texts['tc'], $keyword);
             if ($cnt > $threshold) return true;
@@ -42,14 +42,14 @@ class Naruto implements ModuleInterface {
     }
 
     public function conversion_table (ModuleAnalysis &$info) {
-        return array(
+        return [
             '鳴門' => '鳴人',
             '渦卷鳴人' => '漩渦鳴人',
             '卡凱西' => '卡卡西',
             '複製忍者' => '拷貝忍者',
             '洛克[•·.]?李' => '李洛克',
             '幹柿' => '干柿',
-        );
+        ];
     }
 
 }

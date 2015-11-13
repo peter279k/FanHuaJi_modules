@@ -18,17 +18,17 @@ class HunterXHunter implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = array(
+    public $info = [
         'name' => '獵人',
         'desc' => '日本動畫',
-    );
+    ];
 
     public function load_or_not (ModuleAnalysis &$info) {
         // only works when convert to Transitional Chinese
-        if (!in_array($info->to, array('tw', 'hk'))) return false;
+        if (!in_array($info->to, ['tw', 'hk'])) return false;
         $cnt = 0;
         $threshold = 8;
-        $keywords = array('全職獵人', '幻影旅團', '嵌合蟻', '奇犽', '基路亞', '西索', '畢索加', '希索嘉');
+        $keywords = ['全職獵人', '幻影旅團', '嵌合蟻', '奇犽', '基路亞', '西索', '畢索加', '希索嘉'];
         foreach ($keywords as &$keyword) {
             $cnt += substr_count($info->texts['tc'], $keyword);
             if ($cnt > $threshold) return true;
@@ -42,7 +42,7 @@ class HunterXHunter implements ModuleInterface {
 
     // http://zh.wikipedia.org/wiki/Talk:HUNTER%C3%97HUNTER%E8%A7%92%E8%89%B2%E5%88%97%E8%A1%A8
     public function conversion_table (ModuleAnalysis &$info) {
-        return array(
+        return [
             '全職獵人' => '獵人',
 
             // 主角
@@ -85,6 +85,6 @@ class HunterXHunter implements ModuleInterface {
             '蓋斯魯' => '甘舒',
             '葛度' => '梧桐',
             '鵬茲' => '彭絲',
-        );
+        ];
     }
 }

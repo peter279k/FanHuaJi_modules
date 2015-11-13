@@ -18,17 +18,17 @@ class OnePiece implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = array(
+    public $info = [
         'name' => '海賊王',
         'desc' => '日本動畫',
-    );
+    ];
 
     public function load_or_not (ModuleAnalysis &$info) {
         // only works when convert to Transitional Chinese
-        if (!in_array($info->to, array('tw', 'hk'))) return false;
+        if (!in_array($info->to, ['tw', 'hk'])) return false;
         $cnt = 0;
         $threshold = 8;
-        $keywords = array('海賊王', '路飛', '魯夫', '香吉', '烏索普', '騙人布', '索隆', '佐羅', '喬巴', '布魯克', '羅賓', '弗蘭奇', '佛朗基');
+        $keywords = ['海賊王', '路飛', '魯夫', '香吉', '烏索普', '騙人布', '索隆', '佐羅', '喬巴', '布魯克', '羅賓', '弗蘭奇', '佛朗基'];
         foreach ($keywords as &$keyword) {
             $cnt += substr_count($info->texts['tc'], $keyword);
             if ($cnt > $threshold) return true;
@@ -41,7 +41,7 @@ class OnePiece implements ModuleInterface {
     }
 
     public function conversion_table (ModuleAnalysis &$info) {
-        return array(
+        return [
             '蒙奇' => '蒙其',
             '路飛' => '魯夫',
             '奈美' => '娜美',
@@ -58,7 +58,7 @@ class OnePiece implements ModuleInterface {
             '毛奇' => '摩奇',
             '煙鬼' => '斯摩格',
             '卓夫' => '哲普',
-        );
+        ];
     }
 
 }

@@ -19,17 +19,17 @@ class Japanese implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = array(
+    public $info = [
         'name' => '日文漢字校正',
         'desc' => '修正日文漢字在繁簡轉換時被誤轉的錯誤',
-    );
+    ];
 
     private $encoding = 'UTF-8';
 
-    private $options  = array();
-    private $optionsDefault = array(
+    private $options  = [];
+    private $optionsDefault = [
         'ignoreNewLines' => false, // this will treat \r\n as Japanese chars
-    );
+    ];
 
     // data from Wikipedia ( http://zh.wikipedia.org/wiki/%E5%B8%B8%E7%94%A8%E6%BC%A2%E5%AD%97 )
     private $gojuon       = 'あかさたなはまやらわいきしちにひみりうくすつぬふむゆるんえけせてねへめれおこそとのほもよろをがざだばぱぎじぢびぴぐずづぶぷげぜでべぺごぞどぼぽアカサタナハマヤラワイキシチニヒミリウクスツヌフムユルンエケセテネヘメレオコソトノホモヨロヲガザダバパギジジビピグズズブプゲゼデベペゴゾドボポゃゅょャュョァィゥェォっッヶー々';
@@ -53,7 +53,7 @@ class Japanese implements ModuleInterface {
     private $onlyJpn         = 'generated in the constructor';
     private $mbOnlyJpn       = 'generated in the constructor';
     // char-to-char fixes
-    private $fixesJpnChar = array(
+    private $fixesJpnChar = [
         // IMPORTANT: text length should NOT be changed in these replacements
         // tc -> jp
         '剝' => '剥', '乘' => '乗', '亂' => '乱', '佔' => '占', '佛' => '仏',
@@ -256,9 +256,9 @@ class Japanese implements ModuleInterface {
         '验' => '験', '骑' => '騎', '骚' => '騒', '鱼' => '魚', '鲜' => '鮮',
         '鲶' => '鮎', '鲸' => '鯨', '鸟' => '鳥', '鸡' => '鶏', '鸣' => '鳴',
         '鹤' => '鶴', '齐' => '斉', '齿' => '歯', '龄' => '齢', '龙' => '竜',
-    );
+    ];
     // very special fixes, this should be always applied
-    private $fixesJpnWord = array(
+    private $fixesJpnWord = [
         // IMPORTANT: text length should NOT be changed after replacements
         '可怜' => '可憐',
         '着作' => '著作',
@@ -291,9 +291,9 @@ class Japanese implements ModuleInterface {
         '栖([息霞む]|み分)' => '棲$1',
         '([第])叁' => '$1叄',
         '叁([番])' => '叄$1',
-    );
+    ];
     // fix Chinese word to Japanese usage
-    private $fixesChiWord = array(
+    private $fixesChiWord = [
         // IMPORTANT: text length can be changed, but NO regex should be used
         '主角' => '主人公',
         '収獲' => '収穫',
@@ -303,7 +303,7 @@ class Japanese implements ModuleInterface {
         '牛奶' => '牛乳',
         '花沢' => '花澤',
         '高中' => '高校',
-    );
+    ];
 
     // constructor
     public function __construct ($options=null) {
@@ -369,7 +369,7 @@ class Japanese implements ModuleInterface {
     }
 
     public function conversion_table (ModuleAnalysis &$info) {
-        return array();
+        return [];
     }
 
     // hooks
@@ -395,7 +395,7 @@ class Japanese implements ModuleInterface {
         $textSplitCnt = count($textSplit);
         // get text parts and concatenate them into a new string to $textNoSymbol
         // this string should have no symbol but all Chinese/Japanese/... chars
-        $textNoSymbol = array();
+        $textNoSymbol = [];
         for ($i=0; $i<$textSplitCnt; $i+=2) $textNoSymbol[] = &$textSplit[$i];
         $textNoSymbol   = implode('', $textNoSymbol);
         $mbTextNoSymbol = new MbString($textNoSymbol, $encoding);
@@ -474,7 +474,7 @@ class Japanese implements ModuleInterface {
             // a Japanese region has been found
             break;
         }
-        return $idx<$mbText_len ? array($idxF, $idxB-$idxF+1) : false;
+        return $idx<$mbText_len ? [$idxF, $idxB-$idxF+1] : false;
     }
 
     ////////////////////
@@ -488,7 +488,7 @@ class Japanese implements ModuleInterface {
      * @return array        [unique values in the input array]
      */
     private function array_unique_fast ($array) {
-        $tmp = array();
+        $tmp = [];
         foreach ($array as &$val) $tmp[$val] = true;
         return array_keys($tmp);
     }
