@@ -98,6 +98,7 @@ class Computer implements ModuleInterface {
         '頭文件' => '標頭檔',
         '畫格' => '幀',
         'IP(v[46])?地址' => 'IP$1位址',
+        '回復後([將把刪提發送紀記停繼返回])' => '回覆後$1',
     ];
 
     public function load_or_not (ModuleAnalysis &$info) {
