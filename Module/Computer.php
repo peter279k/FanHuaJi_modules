@@ -25,7 +25,7 @@ class Computer implements ModuleInterface {
 
     // http://jjhou.boolan.com/terms.htm
     private $convTable = [
-        '(?<![寬恢])宏(?![大觀遠])' => '巨集',
+        '(?<![寬恢])宏(?![大觀遠偉])' => '巨集',
         '[制製]表位' => '定位點',
         '[源原]碼' => '原始碼',
         '保存' => '儲存',
