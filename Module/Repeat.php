@@ -47,6 +47,7 @@ class Repeat implements ModuleInterface {
         '石頭剪刀布' => ['剪刀石頭布', ''],
         '石頭剪子布' => ['剪刀石頭布', ''],
         '干幹嘛' => ['幹幹嘛', ''],
+        '疼疼疼' => ['痛痛痛', '疼疼疼(?!痛)'],
     ];
     private $convTableAfter = [
         // search => [replace, conditionRege]
