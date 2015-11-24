@@ -37,11 +37,11 @@ class Japanese implements ModuleInterface {
     private $extraKanji   = '挨曖宛嵐畏萎椅彙茨咽淫唄鬱怨媛艶旺岡臆俺苛牙瓦楷潰諧崖蓋骸柿顎葛釜鎌韓玩伎亀毀畿臼嗅巾僅錦惧串窟熊詣憬稽隙桁拳鍵舷股虎錮勾梗喉乞傲駒頃痕沙挫采塞埼柵刹拶斬恣摯餌鹿叱嫉腫呪袖羞蹴憧拭尻芯腎須裾凄醒脊戚煎羨腺詮箋膳狙遡曽爽痩踪捉遜汰唾堆戴誰旦綻緻酎貼嘲捗椎爪鶴諦溺塡妬賭藤瞳栃頓貪丼那奈梨謎鍋匂虹捻罵剝箸氾汎阪斑眉膝肘訃阜蔽餅璧蔑哺蜂貌頰睦勃昧枕蜜冥麺冶弥闇喩湧妖瘍沃拉辣藍璃慄侶瞭瑠呂賂弄籠麓脇猿凹渦靴稼拐涯垣殻潟喝褐缶頑挟矯襟隅渓蛍嫌洪溝昆崎皿桟傘肢遮蛇酌汁塾尚宵縄壌唇甚据杉斉逝仙栓挿曹槽藻駄濯棚挑眺釣塚漬亭偵泥搭棟洞凸屯把覇漠肌鉢披扉猫頻瓶雰塀泡俸褒朴僕堀磨抹岬妄厄癒悠羅竜戻枠';
 
     // my own defined text
-    private $extraKanji2  = '坤蝉澤剥碍逢繋尨倶冨巌廼弍彦掴灯焔罸聡蒋遥騨鬪凛撫云瀾涸子丑寅卯辰巳午未申酉戌亥劫芦鮎馴懺棲栖霞祐卐卍痍龍綺訊禄魍魎瓢箪躯'; // added by myself
+    private $extraKanji2  = '坤蝉澤剥碍逢繋尨倶冨巌廼弍彦掴灯焔罸聡蒋遥騨鬪凛撫云瀾涸子丑寅卯辰巳午未申酉戌亥劫芦鮎馴懺棲栖霞祐卐卍痍龍綺訊禄魍魎瓢箪躯蠅'; // added by myself
     private $kanjiOnlyJpn = '歩両乗亀亜仏仮伝価倹児処剣剤剰労効勅勧勲単厳収営団囲図圧塀塁壊壱売変奨実寛対専巣帯帰庁広廃弐弾従徳応恵悩悪懐戦戻払抜択拝拠拡挙挿捜掲揺摂斉斎暁暦曽栄桜桟検楽様権歓歯歴毎気浄涙渇済渉渋渓満滝焼猟獣畳発県砕稲穂穏竜粋粛経絵継続総緑縁縄縦繊聴脳荘蔵薬蛍覚観訳読謡豊賛転軽辺逓遅郷酔釈鉄鉱銭鋳錬録関闘陥険隠雑霊頼顕駆騒験髄髪鶏黒黙齢聡凛氷衆浜巌鉢鮎歳値';
     private $punctuations = "\t 　.．…、。~～!！?？·•・×☆★"; // punctuations are considered as Japanese as well
     private $numbers      = "0123456789０１２３４５６７８９#＃%％"; // numbers are considered as Japanese as well
-    private $symbols      = "a-zA-Z\d+\\-*\\/#&"; // regex: chars in ASS tags, but this should be handle in the pre-processing module
+    private $symbols      = "a-z\d+\\-*\\/#&"; // regex: chars in ASS tags, but this should be handle in the pre-processing module
 
     // do not touch these, basically
     private $charPreserved   = "\\2\\3"; // chars that are used in other modules to shorten the input
@@ -257,7 +257,7 @@ class Japanese implements ModuleInterface {
         '鲶' => '鮎', '鲸' => '鯨', '鸟' => '鳥', '鸡' => '鶏', '鸣' => '鳴',
         '鹤' => '鶴', '齐' => '斉', '齿' => '歯', '龄' => '齢', '龙' => '竜',
     ];
-    // very special fixes, this should be always applied
+    // fix Japanese word
     private $fixesJpnWord = [
         // IMPORTANT: text length should NOT be changed after replacements
         '可怜' => '可憐',
@@ -294,6 +294,7 @@ class Japanese implements ModuleInterface {
         '栖([息霞む]|み分)' => '棲$1',
         '([第])叁' => '$1叄',
         '叁([番])' => '叄$1',
+        '灯([す])' => '燈$1',
     ];
     // fix Chinese word to Japanese usage
     private $fixesChiWord = [
@@ -302,12 +303,19 @@ class Japanese implements ModuleInterface {
         '収獲' => '収穫',
         '報導' => '報道',
         '手把' => '手柄',
-        '本當？' => '本当？',
         '牛奶' => '牛乳',
         '花沢' => '花澤',
         '高中' => '高校',
         '小姉' => '小姐',
         '面対し'=>'直面し',
+    ];
+    // those words are not used in Chinese but in Japanese
+    private $fixesJpnWordUnique = [
+        // IMPORTANT: those replacements will be applied in Chinese as well
+        '本當？',
+        '([國国]|電話|郵便|[個法]人|[當当]選|[製商]品|FAX)番號',
+        '番號([檢検]索)',
+        '通信([中])?著信',
     ];
 
     // constructor
@@ -332,7 +340,7 @@ class Japanese implements ModuleInterface {
         // generate $this->symbolsRegex
         $symbols = "{$this->symbols}{$this->charPreserved}";
         if ($this->options['ignoreNewLines']) $symbols .= $this->newLineChars;
-        $this->symbolsRegex = "/([{$symbols}]+)/uS";
+        $this->symbolsRegex = "/([{$symbols}]+)/uimS";
         // generate $this->jpnChars, $this->maybeJpnChars, $this->onlyJpn
         $fixesChiWord_uniqueChars = $this->array_unique_fast(
             // preg_split splits a string into an array of chars
@@ -366,7 +374,7 @@ class Japanese implements ModuleInterface {
     // whether load this module?
     public function load_or_not (ModuleAnalysis &$info) {
         // activate this module only when there are Japanese chars
-        return preg_match("/[{$this->onlyJpn}]/uS", $info->texts['tc']) === 1;
+        return preg_match("/[{$this->onlyJpn}]/uimS", $info->texts['tc']) === 1;
     }
 
     public function loop_or_not () {
@@ -385,6 +393,26 @@ class Japanese implements ModuleInterface {
 
     private function execute (DataInput &$in) {
         $this->correctJpnChars($in->text);
+        $this->correctJpnCharsUnique($in->text);
+    }
+
+    /**
+     * correct unique Japanese Kanji usage which are wrong in $text
+     * @param  string $text [the text to be corrected]
+     * @return none
+     */
+    private function correctJpnCharsUnique (&$text) {
+        $callback = function (&$matches) {
+            // prepend a jpn char to text to make it Japanese
+            $jpChar = 'あ';
+            $jpText = "{$jpChar}{$matches[0]}";
+            $this->correctJpnChars($jpText);
+            // return fixed text without the prepended jpn char
+            return substr($jpText, strlen($jpChar));
+        };
+        foreach ($this->fixesJpnWordUnique as &$sr) {
+            $text = preg_replace_callback("/{$sr}/uimS", $callback, $text);
+        }
     }
 
     /**
@@ -442,7 +470,7 @@ class Japanese implements ModuleInterface {
             $jpnString = $mbText->substr($jpnStart, $jpnLength);
             $textLengthDiff = 0; // text length maybe different after replacing
             foreach ($srRepArray as $sr=> &$rep) {
-                $jpnString = preg_replace("/{$sr}/uS", $rep, $jpnString, -1, $count);
+                $jpnString = preg_replace("/{$sr}/uimS", $rep, $jpnString, -1, $count);
                 if (!$ignoreLengthDiff) {
                     $textLengthDiff += $count * (
                         MbString::static_strlen($rep, $encoding) -
