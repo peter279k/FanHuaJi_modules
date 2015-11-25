@@ -99,6 +99,9 @@ class Computer implements ModuleInterface {
         '界面' => '介面',
         'IP(v[46])?地址' => 'IP$1位址',
         '回復後([將把刪提發送紀記停繼返回])' => '回覆後$1',
+        '時間線(?![性條])'=>'時間軸',
+        '哈希(?![姆])'=>'雜湊',
+        '搜索'=>'搜尋',
     ];
 
     public function load_or_not (ModuleAnalysis &$info) {

@@ -38,7 +38,7 @@ class Japanese implements ModuleInterface {
 
     // my own defined text
     private $extraKanji2  = '坤蝉澤剥碍逢繋尨倶冨巌廼弍彦掴灯焔罸聡蒋遥騨鬪凛撫云瀾涸子丑寅卯辰巳午未申酉戌亥劫芦鮎馴懺棲栖霞祐卐卍痍龍綺訊禄魍魎瓢箪躯蠅'; // added by myself
-    private $kanjiOnlyJpn = '歩両乗亀亜仏仮伝価倹児処剣剤剰労効勅勧勲単厳収営団囲図圧塀塁壊壱売変奨実寛対専巣帯帰庁広廃弐弾従徳応恵悩悪懐戦戻払抜択拝拠拡挙挿捜掲揺摂斉斎暁暦曽栄桜桟検楽様権歓歯歴毎気浄涙渇済渉渋渓満滝焼猟獣畳発県砕稲穂穏竜粋粛経絵継続総緑縁縄縦繊聴脳荘蔵薬蛍覚観訳読謡豊賛転軽辺逓遅郷酔釈鉄鉱銭鋳錬録関闘陥険隠雑霊頼顕駆騒験髄髪鶏黒黙齢聡凛氷衆浜巌鉢鮎歳値';
+    private $kanjiOnlyJpn = '歩両乗亀亜仏仮伝価倹児処剣剤剰労効勅勧勲単厳収営団囲図圧塀塁壊壱売変奨実寛対専巣帯帰庁広廃弐弾従徳応恵悩悪懐戦戻払抜択拝拠拡挙挿捜掲揺摂斉斎暁暦曽栄桜桟検楽様権歓歯歴毎気浄涙渇済渉渋渓満滝焼猟獣畳発県砕稲穂穏竜粋粛経絵継続総緑縁縄縦繊聴脳荘蔵薬蛍覚観訳読謡豊賛転軽辺逓遅郷酔釈鉄鉱銭鋳錬録関闘陥険隠雑霊頼顕駆騒験髄髪鶏黒黙齢聡凛氷衆浜巌鮎歳値';
     private $punctuations = "\t 　.．…、。~～!！?？·•・×☆★"; // punctuations are considered as Japanese as well
     private $numbers      = "0123456789０１２３４５６７８９#＃%％"; // numbers are considered as Japanese as well
     private $symbols      = "a-z\d+\\-*\\/#&"; // regex: chars in ASS tags, but this should be handle in the pre-processing module
