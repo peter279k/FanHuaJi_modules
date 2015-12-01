@@ -263,6 +263,7 @@ class Japanese implements ModuleInterface {
         '可怜' => '可憐',
         '着作' => '著作',
         '提倡' => '提唱',
+        '幾帳' => '几帳',
         '待命' => '待機',
         '([袖経文浄床脇])機' => '$1机',
         '機([案上下辺])' => '机$1',
@@ -296,6 +297,7 @@ class Japanese implements ModuleInterface {
         '([第])叁' => '$1叄',
         '叁([番])' => '叄$1',
         '灯([す])' => '燈$1',
+        '透過(?![し型性])' => '通過',
     ];
     // fix Chinese word to Japanese usage
     private $fixesChiWord = [
