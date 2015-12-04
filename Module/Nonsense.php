@@ -19,15 +19,15 @@ class Nonsense implements ModuleInterface {
 
     // module info
     public $info = [
-        'name' => '廢到笑',
+        'name' => '廢到笑（僅對台灣化有效）',
         'desc' => '將文章轉換成廢文…（須強制啟用模組）',
     ];
 
     // the conversion table
     private static $mapping = [
         '幹你媽的' => 'ㄍㄋㄇㄉ',
-        '\b[cｃＣ][cｃＣ][rｒＲ]\b' => 'ㄈㄈ尺',
-        '\b[pｐＰ][tｔＴ][tｔＴ]\b' => '尸丁丁',
+        '\bCCR\b' => 'ㄈㄈ尺',
+        '\bPTT\b|屍丁丁' => '尸丁丁',
         '出來' => '粗乃',
         '出去' => '粗企',
         '([覺做作幹來])得' => '$1ㄉ',
@@ -47,11 +47,11 @@ class Nonsense implements ModuleInterface {
         '哥哥' => '葛格',
         '朋友' => '碰友',
         '高飛' => '高灰',
-        '所以' => 'so',
+        '(?<![之])所以' => 'so',
         '(?<![不])但(是|(?![書]))' => 'but',
         '(?<![淹沉沈吞])沒' => '迷',
         '超(?![人])' => '敲',
-        '就(?![範擒醫讀寢])' => '啾',
+        '就(?![範擒醫讀寢近])' => '啾',
         '[你妳]' => '泥',
         '們' => '悶',
         '出' => '粗',
@@ -81,6 +81,13 @@ class Nonsense implements ModuleInterface {
         '屁' => 'Ｐ',
         '有' => 'Ｕ',
         '一' => 'yee',
+
+        '(?<![。])。(?![。])' => [
+            '。' => 15,
+            '～' => 2,
+            '的說。' => 2,
+            'www ' => 1,
+        ],
 
         // ㄅㄆㄇㄈ
         '[不吧]' => 'ㄅ',
@@ -128,10 +135,7 @@ class Nonsense implements ModuleInterface {
     }
 
     // hooks
-    public function hookAfter_Simplifize     (DataInput &$in) { $this->doReplace($in); }
-    public function hookAfter_Traditionalize (DataInput &$in) { $this->doReplace($in); }
-    public function hookAfter_Hongkongize    (DataInput &$in) { $this->doReplace($in); }
-    public function hookAfter_Taiwanize      (DataInput &$in) { $this->doReplace($in); }
+    public function hookAfter_Taiwanize (DataInput &$in) { $this->doReplace($in); }
 
     private function doReplace (DataInput &$in) {
         $text = &$in->text;
@@ -141,7 +145,10 @@ class Nonsense implements ModuleInterface {
                 $text = preg_replace_callback(
                     "/$sr/uimS",
                     function () use (&$rep) {
-                        return $rep[array_rand($rep, 1)];
+                        return
+                            isset($rep[0]) ?
+                                $rep[array_rand($rep, 1)] :
+                                $this->getRandomWeightedElement($rep);
                     },
                     $text
                 );
@@ -149,6 +156,7 @@ class Nonsense implements ModuleInterface {
                 $text = preg_replace("/$sr/uimS", $rep, $text);
             }
         }
+        $text = rtrim($text);
     }
 
 }
