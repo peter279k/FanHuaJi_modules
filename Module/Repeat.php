@@ -2,10 +2,10 @@
 
 /**
  * This is a special module for FanHuaJi.
- * It converts "雅...雅...美~蝶~蝶" into "不...不...要~啊~啊".
+ * It converts "草...草...泥~馬~馬" into "操...操...你~媽~媽".
  * The punctuations among chars are ignored and the conversion extends bi-directional.
  * Flaw(s):
- *   - "雅...雅...美~美~蝶~蝶" will not be converted
+ *   - "草...草...泥~泥~馬~馬" will not be converted
  *     because it becomes "雅雅美美蝶蝶" after removing punctuations
  *     and "雅美蝶" can not be found in the string.
  * @author 小斐 <admin@2d-gate.org>
@@ -37,7 +37,6 @@ class Repeat implements ModuleInterface {
         // search => [replace, conditionRegex]
         '草泥馬戈壁' => ['操你媽個屄', ''],
         '草泥馬' => ['操你媽', '草泥馬(?!了)'],
-        '雅美蝶' => ['不要啊', ''],
         '淡定' => ['冷靜', ''],
         '神馬' => ['什麼', '(?<![匹眼眾諸死戰火風水雷之])神馬'],
         '甚什麼' => ['什什麼', ''],
