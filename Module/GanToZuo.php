@@ -52,8 +52,9 @@ class GanToZuo implements ModuleInterface {
 
     private static $keywordPorn = [
         '[姦奸]',
-        '射([了精在]|出來)',
+        '射([了精在得]|出來)',
         '[精卵]子',
+        '處女',
         '肉棒',
         '[小肉]穴(?![道])',
         '高潮',
@@ -86,12 +87,9 @@ class GanToZuo implements ModuleInterface {
         // remove empty elements
         $cntArray = array_filter($cntArray);
         return
+            count($cntArray) >= 3 &&
             (
-                !empty($cntArray) &&
-                max($cntArray) >= 5
-            ) ||
-            (
-                count($cntArray) >= 3 &&
+                max($cntArray) >= 5 ||
                 $this->average($cntArray) >= 1.5
             );
     }
