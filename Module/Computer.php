@@ -24,7 +24,7 @@ class Computer implements ModuleInterface {
     ];
 
     // http://jjhou.boolan.com/terms.htm
-    private $convTable = [
+    private static $mapping = [
         '(?<![寬恢])宏(?![大觀遠偉])' => '巨集',
         '[制製]表位' => '定位點',
         '[源原]碼' => '原始碼',
@@ -106,13 +106,12 @@ class Computer implements ModuleInterface {
 
     public function load_or_not (ModuleAnalysis &$info) {
         if (!in_array($info->to, ['tw', 'hk'])) return false;
-        $convTable = &$this->convTable;
         $text = &$info->texts['tc'];
         // remove all ASCII chars, leave Chinese chars
         $textChi = preg_replace('/[[:ascii:]]+/u', '', $text);
         // count all times of possible replacements
         $cntArray = [];
-        foreach ($convTable as $cn => &$tw) {
+        foreach (self::$mapping as $cn => &$tw) {
             if ($this->isRegex($cn)) {
                 preg_match_all("/{$cn}/u", $textChi, $matches);
                 $cntArray[$cn] = count($matches[0]);
@@ -133,7 +132,7 @@ class Computer implements ModuleInterface {
     }
 
     public function conversion_table (ModuleAnalysis &$info) {
-        return $this->convTable;
+        return self::$mapping;
     }
 
 }
