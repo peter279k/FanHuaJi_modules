@@ -24,7 +24,7 @@ class ProperNoun implements ModuleInterface {
     ];
 
     // if a English word writes in uppercase, we may consider it as a proper noun
-    private $convTable = [
+    private static $mapping = [
         // 人名
         '伯利茲'=>'貝里斯',
         '傅[里裡]葉'=>'傅立葉',
@@ -47,8 +47,8 @@ class ProperNoun implements ModuleInterface {
         '蓋茨'=>'蓋茲',
         '薛定[諤谔鄂]'=>'薛丁格',
         '迪卡普[里裡]奧'=>'狄卡皮歐',
-        '道·?瓊斯'=>'道瓊',
-        '達·?芬奇'=>'達文西',
+        '道([·• 　]*)瓊斯'=>'道$1瓊',
+        '達([·• 　]*)芬奇'=>'達$1文西',
         '馬([裡里])奧'=>'瑪莉歐',
         // 機構、組織
         '(?<![山空幽稻五])[谷穀][哥歌](?![們唱舞謠])'=>'Google',
@@ -63,7 +63,7 @@ class ProperNoun implements ModuleInterface {
         '格林尼治'=>'格林威治',
         '百慕大'=>'百慕達',
         '老撾'=>'寮國',
-        '蘭裡市'=>'蘭里市',
+        '蘭裡市(?![場集政])'=>'蘭里市',
         // 慶典、頒獎
         '(戛納|康城)(國際)?(影展|電影節)'=>'坎城影展',
         // 影視、小說
@@ -134,7 +134,20 @@ class ProperNoun implements ModuleInterface {
     }
 
     public function conversion_table (ModuleAnalysis &$info) {
-        return $this->convTable;
+        return $this->addSpecialFixes($info, self::$mapping);
+    }
+
+    private function addSpecialFixes (ModuleAnalysis &$info, array $mapping) {
+        $textHas = function ($needle, $locale='tc') use (&$info) {
+            $haystack = &$info->texts[$locale];
+            return
+                $this->isRegex($needle) ?
+                    preg_match("/{$needle}/um", $haystack) === 1 :
+                    strpos($haystack, $needle) !== false;
+        };
+        // 空之境界
+        if (!$textHas('蒼崎橙子')) $mapping += [ '橙子'=>'柳丁' ];
+        return $mapping;
     }
 
 }
