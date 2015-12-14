@@ -146,7 +146,11 @@ class ProperNoun implements ModuleInterface {
                     strpos($haystack, $needle) !== false;
         };
         // 空之境界
-        if (!$textHas('蒼崎橙子')) $mapping += [ '橙子'=>'柳丁' ];
+        if ($textHas('蒼崎|兩儀|黑桐')) {
+            $mapping += [ '干也'=>'幹也' ];
+        } else {
+            $mapping += [ '橙子'=>'柳丁' ];
+        }
         return $mapping;
     }
 
