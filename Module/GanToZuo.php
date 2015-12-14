@@ -18,7 +18,7 @@ class GanToZuo implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '幹→做',
         'desc' => '若字幕被判斷為裏番則不會啟用此模組',
     ];

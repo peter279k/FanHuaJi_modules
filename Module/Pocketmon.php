@@ -18,7 +18,7 @@ class Pocketmon implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '神奇寶貝',
         'desc' => '日本動畫',
     ];

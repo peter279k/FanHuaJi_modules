@@ -18,7 +18,7 @@ class Gundam implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '鋼彈',
         'desc' => '日本動畫',
     ];

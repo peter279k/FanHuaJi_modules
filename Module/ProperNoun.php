@@ -18,7 +18,7 @@ class ProperNoun implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '專有名詞',
         'desc' => '較具有通用性的人名、地名、片名、遊戲名等等…',
     ];

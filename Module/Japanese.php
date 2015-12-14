@@ -19,7 +19,7 @@ class Japanese implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '日文漢字校正',
         'desc' => '修正日文漢字在繁簡轉換時被誤轉的錯誤',
     ];

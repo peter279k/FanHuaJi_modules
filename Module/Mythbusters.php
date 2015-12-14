@@ -18,7 +18,7 @@ class Mythbusters implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '流言終結者',
         'desc' => 'Discovery 科普片',
     ];

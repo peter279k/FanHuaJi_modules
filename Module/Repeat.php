@@ -24,7 +24,7 @@ class Repeat implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '重複字取代',
         'desc' => '功能類似這樣：「神...神~神─馬」→「什...什~什─麼」。容易被中斷的詞轉換可以透過此模組得到解決。',
     ];

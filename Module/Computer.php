@@ -18,7 +18,7 @@ class Computer implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '電腦詞彙',
         'desc' => '可以用在應用程式的語系檔',
     ];

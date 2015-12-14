@@ -18,7 +18,7 @@ class Typo implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '錯別字修正',
         'desc' => '修正常見的錯別字，例如：因該→應該',
     ];

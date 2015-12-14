@@ -18,7 +18,7 @@ class TransliterationToTranslation implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '音譯轉意譯',
         'desc' => '例如：胖次→內褲、歐派→胸部',
     ];

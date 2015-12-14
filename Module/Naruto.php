@@ -18,7 +18,7 @@ class Naruto implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '火影忍者',
         'desc' => '日本動畫',
     ];

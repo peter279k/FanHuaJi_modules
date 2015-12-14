@@ -19,7 +19,7 @@ class OnePiece implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '海賊王',
         'desc' => '日本動畫',
     ];

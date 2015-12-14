@@ -18,7 +18,7 @@ class HunterXHunter implements ModuleInterface {
     use ModuleTrait;
 
     // module info
-    public $info = [
+    public static $info = [
         'name' => '獵人',
         'desc' => '日本動畫',
     ];
