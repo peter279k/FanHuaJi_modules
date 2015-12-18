@@ -324,6 +324,7 @@ class Japanese implements ModuleInterface {
         '通信([中])?著信',
         '(決勝|勝負)下著',
         '著物(?=[\s　]|$)',
+        '弁[当當]',
     ];
 
     // constructor
