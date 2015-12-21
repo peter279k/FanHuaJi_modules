@@ -107,24 +107,8 @@ class Computer implements ModuleInterface {
     public function load_or_not (ModuleAnalysis &$info) {
         if (!in_array($info->to, ['tw', 'hk'])) return false;
         $text = &$info->texts['tc'];
-        // remove all ASCII chars, leave Chinese chars
-        $textChi = preg_replace('/[[:ascii:]]+/u', '', $text);
-        // count all times of possible replacements
-        $cntArray = [];
-        foreach (self::$mapping as $cn => &$tw) {
-            if ($this->isRegex($cn)) {
-                preg_match_all("/{$cn}/u", $textChi, $matches);
-                $cntArray[$cn] = count($matches[0]);
-            } else {
-                $cntArray[$cn] = substr_count($textChi, $cn);
-            }
-        }
-        // remove empty elements and outliers
-        $cntArray = array_filter($cntArray);
-        $cntArray = $this->removeOutliers($cntArray, 1.2);
-        return
-            count($cntArray) >= 6 && // too few types of conversion are performed
-            $this->average($cntArray) >= 1.5; // not all conversion appears rarely
+        $keywords = array_keys(self::$mapping);
+        return $this->LoadOrNotByKeywords($text, $keywords, 6, 1.5, 1.2);
     }
 
     public function loop_or_not () {
