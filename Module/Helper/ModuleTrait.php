@@ -14,6 +14,37 @@ trait ModuleTrait {
     }
 
     /**
+     * a method to determine whether a module should be loaded or not
+     * by using a keyword array, min keywords found, min average occurrence
+     * and the standard deviation to filter outliers
+     * @param string  &$text       [input text]
+     * @param array   &$keywords   [keyword (regex or plain text) list]
+     * @param integer $minKeywords [min average occurrence]
+     * @param float   $minAvg      [min keywords found]
+     * @param float   $stdDev      [standard deviation to filter outliers]
+     */
+    private function LoadOrNotByKeywords (&$text, array &$keywords, $minKeywords=3, $minAvg=1.5, $stdDev=1.2) {
+        // count all times of possible replacements
+        $cntArray = [];
+        foreach ($keywords as &$keyword) {
+            if ($this->isRegex($keyword)) {
+                preg_match_all("/{$keyword}/uimS", $text, $matches);
+                $cntArray[$keyword] = count($matches[0]);
+            } else {
+                $cntArray[$keyword] = substr_count($text, $keyword);
+            }
+        }
+        // remove empty elements and outliers
+        $cntArray = array_filter($cntArray);
+        $cntArray = $this->removeOutliers($cntArray, $stdDev);
+        return
+            // too few types of conversion are performed
+            count($cntArray) >= $minKeywords &&
+            // not all conversion appears rarely
+            $this->average($cntArray) >= $minAvg;
+    }
+
+    /**
      * calculate the average value of a given array
      * @param  array   $a [the given array]
      * @return number     [the average value]
