@@ -151,6 +151,13 @@ class ProperNoun implements ModuleInterface {
         } else {
             $mapping += [ '橙子'=>'柳丁' ];
         }
+        // 難以判斷轉換例外的學程
+        if ($textHas('(?<![當起最])初中')) {
+            $mapping += [
+                '(?<![當起最])初中'=>'國中',
+                '(?<![當起最]|[年月日天])初([二三四五六]|一(?!十五))(?![吃])'=>'國$1',
+            ];
+        }
         return $mapping;
     }
 
