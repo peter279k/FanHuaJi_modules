@@ -1,15 +1,38 @@
 <?php
 
+/**
+ * This is class is a standard for a module class.
+ * @author 小斐 <admin@2d-gate.org>
+ */
+
 namespace XiaoFei\Fanhuaji\Module\Helper;
 
-trait ModuleTrait {
+use XiaoFei\Fanhuaji\DataType\DataInput;
+use XiaoFei\Fanhuaji\DataType\ModuleAnalysis;
+
+abstract class AbstractModule {
+
+    ///////////////
+    // interface //
+    ///////////////
+
+    // the conversion table: array('from1'=>'to1', ...)
+    abstract public function conversion_table (ModuleAnalysis &$info);
+    // load this module or not?
+    abstract public function load_or_not (ModuleAnalysis &$info);
+    // repeat replacement until there is no text changes?
+    abstract public function loop_or_not ();
+
+    ///////////
+    // trait //
+    ///////////
 
     /**
      * check a given string is a regex or not
      * @param  string  $str [the given string]
      * @return boolean      [true/false = the given string is/isn't regex]
      */
-    private function isRegex ($str) {
+    protected function isRegex ($str) {
         return preg_match('/[\\\[\](){}+\-|!?:=.*<^]/uS', $str) === 1;
     }
 
@@ -23,7 +46,7 @@ trait ModuleTrait {
      * @param float   $minAvg      [min keywords found]
      * @param float   $stdDev      [standard deviation to filter outliers]
      */
-    private function LoadOrNotByKeywords (&$text, array &$keywords, $minKeywords=3, $minAvg=1.5, $stdDev=1.2) {
+    protected function LoadOrNotByKeywords (&$text, array &$keywords, $minKeywords=3, $minAvg=1.5, $stdDev=1.2) {
         // count all times of possible replacements
         $cntArray = [];
         foreach ($keywords as &$keyword) {
@@ -49,7 +72,7 @@ trait ModuleTrait {
      * @param  array   $a [the given array]
      * @return number     [the average value]
      */
-    private function average (array $a) {
+    protected function average (array $a) {
         return array_sum($a) / count($a);
     }
 
@@ -59,7 +82,7 @@ trait ModuleTrait {
      * @param  boolean $sample [true/false = sample/population standard deviation]
      * @return number          [the standard deviation]
      */
-    private function standardDeviation (array $a, $sample=false) {
+    protected function standardDeviation (array $a, $sample=false) {
         $n = count($a);
         if ($n === 0) {
             trigger_error("The array has no element!", E_USER_WARNING);
@@ -85,7 +108,7 @@ trait ModuleTrait {
      * @param  integer $magnitude [elements should be removed if they out of how many standard deviations?]
      * @return array              [the array with outliers removed]
      */
-    private function removeOutliers (array $a, $magnitude=1) {
+    protected function removeOutliers (array $a, $magnitude=1) {
         $n = count($a);
         if ($n === 0) return [];
         $mean = $this->average($a);
@@ -108,7 +131,7 @@ trait ModuleTrait {
      * @param  array  $array [an array whose values are positive integer weightings]
      * @return               [a randomly picked array key]
      */
-    private function getRandomWeightedElement (array $array) {
+    protected function getRandomWeightedElement (array $array) {
         $rand = mt_rand(1, (int) array_sum($array));
         foreach ($array as $key => &$weighting) {
             $rand -= $weighting;
