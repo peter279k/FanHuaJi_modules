@@ -8,15 +8,12 @@
 
 namespace XiaoFei\Fanhuaji\Module;
 
-use XiaoFei\Fanhuaji\Module\Helper\ModuleInterface;
-use XiaoFei\Fanhuaji\Module\Helper\ModuleTrait;
 use XiaoFei\Fanhuaji\DataType\DataInput;
-use XiaoFei\Fanhuaji\DataType\ModuleAnalysis;
 use XiaoFei\Fanhuaji\DataType\MbString;
+use XiaoFei\Fanhuaji\DataType\ModuleAnalysis;
+use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
-class Japanese implements ModuleInterface {
-
-    use ModuleTrait;
+class Japanese extends AbstractModule {
 
     // module info
     public static $info = [

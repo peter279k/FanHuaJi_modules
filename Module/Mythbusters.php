@@ -8,14 +8,11 @@
 
 namespace XiaoFei\Fanhuaji\Module;
 
-use XiaoFei\Fanhuaji\Module\Helper\ModuleInterface;
-use XiaoFei\Fanhuaji\Module\Helper\ModuleTrait;
 use XiaoFei\Fanhuaji\DataType\DataInput;
 use XiaoFei\Fanhuaji\DataType\ModuleAnalysis;
+use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
-class Mythbusters implements ModuleInterface {
-
-    use ModuleTrait;
+class Mythbusters extends AbstractModule {
 
     // module info
     public static $info = [

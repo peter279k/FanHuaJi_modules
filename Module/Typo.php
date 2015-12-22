@@ -8,14 +8,11 @@
 
 namespace XiaoFei\Fanhuaji\Module;
 
-use XiaoFei\Fanhuaji\Module\Helper\ModuleInterface;
-use XiaoFei\Fanhuaji\Module\Helper\ModuleTrait;
 use XiaoFei\Fanhuaji\DataType\DataInput;
 use XiaoFei\Fanhuaji\DataType\ModuleAnalysis;
+use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
-class Typo implements ModuleInterface {
-
-    use ModuleTrait;
+class Typo extends AbstractModule {
 
     // module info
     public static $info = [
@@ -25,7 +22,7 @@ class Typo implements ModuleInterface {
 
     private static $mapping = [
         '漚心([瀝泣])血' => '嘔心$1血',
-        '(?<![原])因該(?![員生名])' => '應該',
+        '(?<![原緣起前近遠主成誘肇死病變動來歸功公]|海洛)因該(?![員生名條]|[年月日周週季]|[州洲國省縣市鎮鄉村鄰里]|[信訊]息|視頻|影片)' => '應該',
         '(?<![一])遭(了(?![殃罪]|[一二兩三四五六七八九十好多幾]+次))' => '糟$1',
         '遭([糕透])' => '糟$1',
         '咽下' => '嚥下',
@@ -35,9 +32,10 @@ class Typo implements ModuleInterface {
         '(?<![風氣])味增(?![加添])' => '味噌',
         '(?<![保])姆指(?![著])' => '拇指',
         '(?<![自])己經' => '已經',
-        '(?<![開研])發韌' => '發軔',
+        '(?<![開研])發韌(?![體])' => '發軔',
         '脈博(?![覽士])' => '脈搏',
         '哲伏(?![擊筆])' => '蟄伏',
+        '抽蓄(?!([火水風核地熱]*[力能]?)([電]|發電))' => '抽搐',
         '藉(?=[口故由此以著機端槁卉箸助手甚詞]|[這那上下][次個游面方]|了(?![\s　，。!！?？]|$)|寇兵|草枕塊)' => '_protect_Jie_', // protect "藉"
         '([書祖國地戶])藉' => '$1籍',
         '藉貫' => '籍貫',

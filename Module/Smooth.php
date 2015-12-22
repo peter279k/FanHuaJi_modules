@@ -8,14 +8,11 @@
 
 namespace XiaoFei\Fanhuaji\Module;
 
-use XiaoFei\Fanhuaji\Module\Helper\ModuleInterface;
-use XiaoFei\Fanhuaji\Module\Helper\ModuleTrait;
 use XiaoFei\Fanhuaji\DataType\DataInput;
 use XiaoFei\Fanhuaji\DataType\ModuleAnalysis;
+use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
-class Smooth implements ModuleInterface {
-
-    use ModuleTrait;
+class Smooth extends AbstractModule {
 
     // module info
     public static $info = [
@@ -89,6 +86,7 @@ class Smooth implements ModuleInterface {
         '([很好可挺蠻還]|[這那]麼|真是|非常|超級?)精神(?![力病]|抖擻|不好)'=>'$1有精神',
         '([愛想要能叫讓]|可以)([你妳您汝咱俺余我他她它牠祂誰們]*)(幹(?>啥|[什甚]麼)){2}'=>'$1$2$3就$3',
         '(?<![你妳您汝咱俺余我他她它牠祂誰們]|[就打走跑逃溜滑飛])出故障'=>'故障',
+        "(不[關干])([你妳您汝咱俺余我他她它牠祂誰們]+)事"=>'$1$2的事',
 
         // add "一" for "個"
         '(?<![一二兩三四五六七八九十百千萬億])個([^\s　]*)(比[方喻])'=>'_protect_Ge_$1$2_', // protect "個"

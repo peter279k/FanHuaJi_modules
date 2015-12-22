@@ -8,14 +8,11 @@
 
 namespace XiaoFei\Fanhuaji\Module;
 
-use XiaoFei\Fanhuaji\Module\Helper\ModuleInterface;
-use XiaoFei\Fanhuaji\Module\Helper\ModuleTrait;
 use XiaoFei\Fanhuaji\DataType\DataInput;
 use XiaoFei\Fanhuaji\DataType\ModuleAnalysis;
+use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
-class TransliterationToTranslation implements ModuleInterface {
-
-    use ModuleTrait;
+class TransliterationToTranslation extends AbstractModule {
 
     // module info
     public static $info = [
