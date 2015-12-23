@@ -27,13 +27,50 @@ abstract class AbstractModule {
     // trait //
     ///////////
 
+    // module info
+    public static $info = [
+        'name' => 'defaultModuleName',
+        'desc' => 'defaultDescription',
+    ];
+
     /**
-     * check a given string is a regex or not
+     * PSEUDO check a given string is a regex or not
+     * this may be useful for detecting potential regex typos
      * @param  string  $str [the given string]
      * @return boolean      [true/false = the given string is/isn't regex]
      */
     protected function isRegex ($str) {
-        return preg_match('/[\\\[\](){}+\-|!?:=.*<^]/uS', $str) === 1;
+        return preg_match('/[\\\\\[\](){}+|.*?><!:=^$]/uS', $str) === 1;
+    }
+
+    /**
+     * a general string replacing function using str_replace/preg_replace
+     * @param  string  $search   [string/regex to search]
+     * @param  string  $replace  [string/regex to be replaced with]
+     * @param  string  &$subject [the original string]
+     * @param  integer $limit    [maximum replacements could be performed]
+     * @param  integer &$count   [replacement counts]
+     * @return string            [the replaced string]
+     */
+    protected function strReplaceMixed ($search, $replace, $subject, $limit=-1, &$count=0) {
+        $limit = (int) $limit;
+        // if $search is a regex, use preg_replace
+        if ($this->isRegex($search)) {
+            $ret = @preg_replace("/{$search}/uimS", $replace, $subject, $limit, $count);
+            if (is_null($ret)) {
+                // make debugging easier
+                throw new \Exception("`{$search}` is not a legal regex");
+            }
+        // $search is not a regex and we want to replace all occurrences
+        } else if ($limit < 0) {
+            $ret = str_replace($search, $replace, $subject, $count);
+        // $search is not a regex but we want to replace partial occurrences
+        } else {
+            $split = explode($search, $subject, $limit+1);
+            $count = count($split) - 1;
+            $ret = implode($replace, $split);
+        }
+        return $ret;
     }
 
     /**
