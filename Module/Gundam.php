@@ -48,6 +48,8 @@ class Gundam extends AbstractModule {
     public function conversion_table_tw () {
         return [
             '[高敢]達' => '鋼彈',
+            '渣古' => '薩克',
+            '老虎' => '古夫',
         ];
     }
 
