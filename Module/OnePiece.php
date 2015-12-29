@@ -268,6 +268,12 @@ class OnePiece extends AbstractModule {
      * @return array [parsed data in array]
      * @ref https://zh.wikipedia.org/wiki/%E6%A8%A1%E5%9D%97:CGroup/OnePiece
      */
+    private function generateMappingFromWikiPage (&$text) {
+        $conversions = $this->parseWikiPage($text);
+        $mapping = $this->filterConversions($conversions);
+        return $mapping;
+    }
+
     private function parseWikiPage (&$text) {
         if (preg_match_all("#rule = '([^\r\n]+;)'#imuS", $text, $rules)) {
             $rules = $rules[1];
