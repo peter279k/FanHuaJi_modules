@@ -36,11 +36,12 @@ abstract class AbstractModule {
     /**
      * PSEUDO check a given string is a regex or not
      * this may be useful for detecting potential regex typos
+     * @ref    http://php.net/manual/en/regexp.reference.meta.php
      * @param  string  $str [the given string]
      * @return boolean      [true/false = the given string is/isn't regex]
      */
     protected function isRegex ($str) {
-        return preg_match('/[\\\\\[\](){}+|.*?><!:=^$]/uS', $str) === 1;
+        return preg_match('/[ \\ ^ $ . \[\] | () ? * + {} ]/uSx', $str) === 1;
     }
 
     /**
@@ -56,8 +57,8 @@ abstract class AbstractModule {
         $limit = (int) $limit;
         // if $search is a regex, use preg_replace
         if ($this->isRegex($search)) {
-            $ret = @preg_replace("/{$search}/uimS", $replace, $subject, $limit, $count);
-            if (is_null($ret)) {
+            $ret = preg_replace("/{$search}/uimS", $replace, $subject, $limit, $count);
+            if (is_null($ret) && preg_last_error() == PREG_NO_ERROR) {
                 // make debugging easier
                 throw new \Exception("`{$search}` is not a legal regex");
             }
