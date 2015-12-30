@@ -4,6 +4,7 @@
  * This is a module for FanHuaJi.
  * It's responsible for transforming words about HunterXHunter.
  * @author 小斐 <admin@2d-gate.org>
+ * @ref https://zh.wikipedia.org/wiki/Template:CGroup/HUNTER
  */
 
 namespace XiaoFei\Fanhuaji\Module;
@@ -37,7 +38,6 @@ class HunterXHunter extends AbstractModule {
         return false;
     }
 
-    // http://zh.wikipedia.org/wiki/Talk:HUNTER%C3%97HUNTER%E8%A7%92%E8%89%B2%E5%88%97%E8%A1%A8
     public function conversion_table (ModuleAnalysis &$info) {
         return [
             '全職獵人' => '獵人',
@@ -82,6 +82,12 @@ class HunterXHunter extends AbstractModule {
             '蓋斯魯' => '甘舒',
             '葛度' => '梧桐',
             '鵬茲' => '彭絲',
+
+            // ...
+            '蓋美拉蟻' => '嵌合蟻',
+            '百事能奇力貼' => '伸縮自在的愛',
+            '杜奇利質感' => '輕薄的假象',
+
         ];
     }
 }

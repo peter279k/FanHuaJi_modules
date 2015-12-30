@@ -217,7 +217,7 @@ class Gundam extends AbstractModule {
             '特[裡里]尼迪' => '東尼迪小隊',
             '崔尼提' => '東尼迪小隊',
             '超兵機關' => '超人機關',
-            'Iris公司' => '彩虹女神兵工廠',
+            '(?:Iris公司)' => '彩虹女神兵工廠',
             '艾利斯公司' => '彩虹女神兵工廠',
             '艾奧瓦' => '愛荷華',
             '弗吉尼亞' => '維珍尼亞',
@@ -491,8 +491,8 @@ class Gundam extends AbstractModule {
             '殖民地運送' => '殖民衛星運輸',
             '殖民地運輸' => '殖民衛星運輸',
             '殖民地' => '殖民衛星',
-            'X Rounder' => '極能者',
-            'X-Rounder' => '極能者',
+            '(?:X Rounder)' => '極能者',
+            '(?:X-Rounder)' => '極能者',
             '消滅蝙蝠戰役' => '蝙蝠擊退戰',
             '驅蝠戰役' => '蝙蝠擊退戰',
             '歌姬號' => '迪娃女神號',
@@ -523,7 +523,7 @@ class Gundam extends AbstractModule {
             '軌道模式' => '軌道型',
             '拉古那模式' => '拉古那型',
             '傑諾亞斯' => '榭魯艾斯',
-            'Custom' => '$1改',
+            '(?:Custom)' => '$1改',
             '特裝型' => '$1改',
             '阿黛爾' => '亞德魯',
             '亞黛爾' => '亞德魯',
@@ -543,7 +543,7 @@ class Gundam extends AbstractModule {
             '艾美達' => '艾梅達',
             '傑諾' => '哲諾',
             '桀諾' => '哲諾',
-            'JACKEDGE' => '傑克艾治型',
+            '(?:JACKEDGE)' => '傑克艾治型',
             '傑斯利刃型' => '傑克艾治型',
             '巴羅諾克' => '巴朗諾克',
             '迦弗朗' => '格夫蘭',
@@ -1051,8 +1051,8 @@ class Gundam extends AbstractModule {
             '白色基地' => '木馬號',
             '扎古' => '渣古',
             '薩克' => '渣古',
-            '鋼加農' => '鐳射大炮',
-            '鋼加農A' => '鐳射大炮A',
+            '鋼加農' => '雷射大炮',
+            '鋼加農A' => '雷射大炮A',
             '鋼坦克' => '太空坦克',
             '先行量產型鋼坦克' => '先行量產型太空坦克',
             '核心戰機' => '核心戰鬥機',
@@ -1109,7 +1109,7 @@ class Gundam extends AbstractModule {
             '雅典娜宮殿' => '帕拉斯·亞迪尼',
             '帕拉斯([．·•])雅典娜' => '帕拉斯$1亞迪尼',
             '波力諾克([．·•])沙曼' => '波連洛$1沙曼',
-            'Bolinoak' => '波連洛$1沙曼',
+            '(?:Bolinoak)' => '波連洛$1沙曼',
             '吉歐' => '鐵奧',
             '瑪拉賽' => '姆歷沙',
             '馬拉賽' => '姆歷沙',
@@ -1165,9 +1165,9 @@ class Gundam extends AbstractModule {
             '戈佐拉' => '哥索拉',
             '逆襲的夏亞' => '馬沙之反擊',
             '閃光之哈薩維' => '閃光之凱薩衛',
-            'New Type' => '新類型人',
+            '(?:New Type)' => '新類型人',
             '新人類' => '新類型人',
-            'NewType' => '新類型人',
+            '(?:NewType)' => '新類型人',
             '飛翅浮游炮' => '飛翅砲',
             '鰭形感應炮' => '飛翅砲',
 
@@ -1395,7 +1395,7 @@ class Gundam extends AbstractModule {
             '特[裡里]尼迪' => '崔尼提',
             '東尼迪小隊' => '崔尼提',
             '超人機關' => '超兵機關',
-            'Iris公司' => '艾利斯公司',
+            '(?:Iris公司)' => '艾利斯公司',
             '彩虹女神兵工廠' => '艾利斯公司',
             '艾奧瓦' => '愛荷華',
             '弗吉尼亞' => '維吉尼亞',
@@ -1410,7 +1410,6 @@ class Gundam extends AbstractModule {
             '大砲' => '火箭砲',
             '轟擊模式' => '重火力模式',
             '粒子束' => '光束',
-            '雷射' => '光束',
             '容器' => '電容器',
             '0高達' => '0鋼彈',
             '能天使高達' => '能天使鋼彈',
@@ -1749,9 +1748,8 @@ class Gundam extends AbstractModule {
             '薛瑪西斯' => '希格瑪西斯',
             '來福' => '步槍',
             '來福槍' => '步槍',
-            '雷射噴激槍' => '光束噴槍',
-            '雷射劍' => '光束軍刀',
-            '雷射' => '光束',
+            '[雷鐳]射噴激槍' => '光束噴槍',
+            '[雷鐳]射劍' => '光束軍刀',
             '套索' => '金臂勾',
             '飛踢' => '膝撞',
             '片刃' => '席格刀',
@@ -2243,8 +2241,8 @@ class Gundam extends AbstractModule {
             '木馬號' => '白色基地',
             '扎古' => '薩克',
             '渣古' => '薩克',
-            '鐳射大炮' => '鋼加農',
-            '鐳射大炮A' => '鋼加農A',
+            '[雷鐳]射大炮' => '鋼加農',
+            '[雷鐳]射大炮A' => '鋼加農A',
             '太空坦克' => '鋼坦克',
             '先行量產型太空坦克' => '先行量產型鋼坦克',
             '核心戰機' => '核戰機',
@@ -2254,7 +2252,7 @@ class Gundam extends AbstractModule {
             '老虎' => '古夫',
             '愛美號' => '艾爾美斯',
             '鐵球' => '鋼球',
-            '大魔' => '德姆',
+            '大魔(?![王])' => '德姆',
             '力克([．·•])大魔' => '力克$1德姆',
             '力奇([．·•])大魔' => '力克$1德姆',
             '力克大魔' => '力克德姆',
@@ -2356,9 +2354,9 @@ class Gundam extends AbstractModule {
             '哥索拉' => '戈佐拉',
             '馬沙之反擊' => '逆襲的夏亞',
             '閃光之凱薩衛' => '閃光之哈薩維',
-            'New Type' => '新人類',
+            '(?:New Type)' => '新人類',
             '新類型人' => '新人類',
-            'NewType' => '新人類',
+            '(?:NewType)' => '新人類',
             '飛翅浮游炮' => '鰭形感應炮',
             '飛翅砲' => '鰭形感應炮',
 
@@ -2409,6 +2407,8 @@ class Gundam extends AbstractModule {
 
             // ...
             '[高敢]達' => '鋼彈',
+            '雙面蟹' => '索克',
+            '[雷鐳]射' => '光束',
 
         ];
     }
@@ -2483,20 +2483,22 @@ class Gundam extends AbstractModule {
 
     public function buildMapping (array &$conversions, $targetLocale) {
         $nameDelimiters = '．·•';
-        $textToRegex = function ($text, $srcLocale='sc') use (&$nameDelimiters) {
-            switch ($srcLocale) {
+        $textToRegex = function ($text, $type='from') use (&$nameDelimiters) {
+            switch ($type) {
                 default:
-                case 'sc':
+                case 'from':
                     $fixTable = [
                         "[{$nameDelimiters}]" => "([{$nameDelimiters}])",
+                        '[雷鐳]' => '[雷鐳]',
                         '[裡里]' => '[裡里]',
                         '[贊讚]' => '[贊讚]',
                         '[菸煙]' => '[菸煙]',
                         '哥[德特]' => '哥[德特]',
                         '大將' => '大將(?![軍])',
+                        '大魔' => '大魔(?![王])',
                     ];
                     break;
-                case 'tc':
+                case 'to':
                     $fixTable = [
                         "[{$nameDelimiters}]" => '\$1',
                     ];
@@ -2533,8 +2535,8 @@ class Gundam extends AbstractModule {
                 }
             }
             foreach ($keys as $key => &$_) {
-                $key = $textToRegex($key, 'sc');
-                $to = $textToRegex($to, 'tc');
+                $key = $textToRegex($key, 'from');
+                $to = $textToRegex($to, 'to');
                 $ret[$key] = $to;
             }
         }
