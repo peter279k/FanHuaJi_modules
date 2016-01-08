@@ -76,7 +76,6 @@ class Repeat extends AbstractModule {
     private function _hookBefore (DataInput &$in) {
         $this->replaceRepeatPattern(
             $in->text,
-            $this->punctuationRegex,
             $this->convTableBefore,
             $this->context
         );
@@ -85,16 +84,15 @@ class Repeat extends AbstractModule {
     private function _hookAfter (DataInput &$in) {
         $this->replaceRepeatPattern(
             $in->text,
-            $this->punctuationRegex,
             $this->convTableAfter,
             $this->context
         );
     }
 
-    private function replaceRepeatPattern (&$text, &$punctuationRegex, &$convTable, $context) {
+    private function replaceRepeatPattern (&$text, array &$convTable, $context) {
 
         // split text into text parts (even key) and symbol parts (odd key)
-        $textSplit = preg_split($punctuationRegex, $text, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $textSplit = preg_split($this->punctuationRegex, $text, -1, PREG_SPLIT_DELIM_CAPTURE);
         $textSplitCnt = count($textSplit);
 
         // get text parts and merge them into a new string to $textNoSymbol
@@ -123,7 +121,7 @@ class Repeat extends AbstractModule {
                 if ($seek === false) break;
                 // check the $conditionRegex
                 $textSlice = $mbTextNoSymbol->substr(($seek>$context ? $seek-$context : 0), $mbSr_len+$context<<1);
-                if (!empty($conditionRegex) && !preg_match("/$conditionRegex/u", $textSlice)) continue;
+                if (!empty($conditionRegex) && !preg_match("/{$conditionRegex}/u", $textSlice)) continue;
                 // replace frontward
                 $seekFront = $seek;
                 while ($seekFront > 0) {

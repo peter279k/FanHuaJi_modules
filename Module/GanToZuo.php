@@ -23,7 +23,7 @@ class GanToZuo extends AbstractModule {
     private static $mapping = [
         // protect
         '(^\s*|[\3])幹(?=[\s　]|$)' => '$1_protect_Gan_',
-        '([樹能對猛實苦])幹' => '$1_protect_Gan_',
+        '([被樹能對猛實苦])幹' => '$1_protect_Gan_',
         '幹(?=[線])' => '_protect_Gan_',
         '活(?=[動力])' => '_protect_Huo_',
         // replace 幹活 - 做事
@@ -46,7 +46,7 @@ class GanToZuo extends AbstractModule {
         '是幹([這那])' => '是做$1',
         '事幹([阿啊吧呢嗎囉哩嘞吶呀嘎唷喲耶]|[\\\\]|[\s　]|$)' => '事做$1',
         '幹([你妳您汝咱俺余我他她它牠祂誰們]+)?[幹做]的' => '做$1做的',
-        '[干乾幹做]([就])[干乾幹做]' => '$1做$2做',
+        '[干乾幹做]([就])[干乾幹做]' => '做$1做',
         '(什麼[也都]沒|不[好用])幹(?![部事])' => '$1做',
         '([都就也])幹(?=[\\\\]|[\s　]|$)' => '$1做',
         '死([干乾幹做])[活事]([干乾幹做])' => '死幹活幹',
@@ -63,13 +63,15 @@ class GanToZuo extends AbstractModule {
         '[精卵]子',
         '處女',
         '肉棒',
+        '中出',
         '[小肉]穴(?![道])',
         '高潮',
     ];
 
     public function load_or_not (ModuleAnalysis &$info) {
         if (!in_array($info->to, ['tw', 'hk'])) return false;
-        return !$this->isPorn($info->texts['tc']);
+        // we do not load this module if the text is detected as a porn
+        return !$this->LoadOrNotByKeywords($info->texts['tc'], self::$keywordPorn, 3, 1.5, PHP_INT_MAX);
     }
 
     public function loop_or_not () {
@@ -78,27 +80,6 @@ class GanToZuo extends AbstractModule {
 
     public function conversion_table (ModuleAnalysis &$info) {
         return self::$mapping;
-    }
-
-    private function isPorn (&$text) {
-        // count all times of possible replacements
-        $cntArray = [];
-        foreach (self::$keywordPorn as &$keyword) {
-            if ($this->isRegex($keyword)) {
-                preg_match_all("/{$keyword}/u", $text, $matches);
-                $cntArray[$keyword] = count($matches[0]);
-            } else {
-                $cntArray[$keyword] = substr_count($text, $keyword);
-            }
-        }
-        // remove empty elements
-        $cntArray = array_filter($cntArray);
-        return
-            count($cntArray) >= 3 &&
-            (
-                max($cntArray) >= 5 ||
-                $this->average($cntArray) >= 1.5
-            );
     }
 
 }

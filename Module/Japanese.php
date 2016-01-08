@@ -179,7 +179,7 @@ class Japanese extends AbstractModule {
         '溃' => '潰', '满' => '満', '滨' => '浜', '漤' => '濫', '澜' => '瀾',
         '濑' => '瀬', '灭' => '滅', '灵' => '霊', '灾' => '災', '舍' => '捨',
         '烟' => '煙', '烦' => '煩', '烧' => '焼', '热' => '熱', '爱' => '愛',
-        '牺' => '犠', '犟' => '強', '犹' => '猶', '狱' => '獄', '猎' => '猟',
+        '牺' => '犠', '强' => '強', '犹' => '猶', '狱' => '獄', '猎' => '猟',
         '环' => '環', '现' => '現', '玺' => '璽', '电' => '電', '疗' => '療',
         '疡' => '瘍', '盐' => '塩', '监' => '監', '盖' => '蓋', '盘' => '盤',
         '矫' => '矯', '矿' => '鉱', '础' => '礎', '确' => '確', '仆' => '僕',
@@ -278,6 +278,7 @@ class Japanese extends AbstractModule {
         '裹([てた実樹物汁])' => '果$1',
         '([郷実絵])裏' => '$1里',
         '裏([実])' => '里$1',
+        '(成功)里' => '$1裏',
         '(?<![根躯])幹(?![線部])' => '乾',
         '雲([いえうわ])' => '云$1',
         '拠([え])' => '据$1',
@@ -316,13 +317,15 @@ class Japanese extends AbstractModule {
     // those words are not used in Chinese but in Japanese
     private $fixesJpnWordUnique = [
         // IMPORTANT: those replacements will be applied in Chinese as well
-        '(?<=^|[\3]|[\s　])(本當|失禮)(?=[\s　]|[?？]|$)',
-        '([國国]|電話|郵便|[個法]人|[當当]選|[製商]品|FAX)番號',
-        '番號([檢検]索)',
+        "(?<=^|[\3]|[\s　])(本當|失禮)(?=[\s　]|[?？]|$)",
+        '([国國]|[电電][话話]|[邮郵]便|[个個法]人|[当當][选選]|[制製商]品|FAX)番[号號]',
+        '番[号號]([检檢検]索)',
         '通信([中])?著信',
-        '(決勝|勝負)下著',
+        '(決[胜勝]|[胜勝]負)下[着著]',
+        '[独獨][坛擅壇][场場](?<!独[擅壇]場)',
         '著物(?=[\s　]|$)',
-        '弁[当當](?![著])',
+        '弁[当當](?![着著])',
+        '妻帶者',
     ];
 
     // constructor
@@ -374,8 +377,14 @@ class Japanese extends AbstractModule {
     // whether load this module?
     public function load_or_not (ModuleAnalysis &$info) {
         if (!in_array($info->to, ['sc', 'tw', 'hk'])) return false;
-        // activate this module only when there are Japanese chars
-        return preg_match("/[{$this->mustBeJpn}]/uimS", $info->texts['tc']) === 1;
+        // activate this module if there is a Japanese char
+        if (preg_match("/[{$this->mustBeJpn}]/uim", $info->texts['tc'])) return true;
+        // activate this module if there is a Japanese-only word
+        foreach ($this->fixesJpnWordUnique as &$regex) {
+            if (preg_match("/{$regex}/uim", $info->texts['tc'])) return true;
+        }
+        // looks like no need to activate
+        return false;
     }
 
     public function loop_or_not () {
@@ -403,16 +412,19 @@ class Japanese extends AbstractModule {
      * @return none
      */
     private function correctJpnCharsUnique (&$text) {
-        $callback = function (&$matches) {
-            // prepend a jpn char to text to make it Japanese
-            $jpChar = 'あ';
-            $jpText = "{$jpChar}{$matches[0]}";
-            $this->correctJpnChars($jpText);
-            // return fixed text without the prepended jpn char
-            return substr($jpText, strlen($jpChar));
-        };
         foreach ($this->fixesJpnWordUnique as &$sr) {
-            $text = preg_replace_callback("/{$sr}/uimS", $callback, $text);
+            $text = preg_replace_callback(
+                "/{$sr}/uimS",
+                function (&$matches) {
+                    // prepend a jpn char to text to make it Japanese
+                    $jpChar = 'あ';
+                    $jpText = "{$jpChar}{$matches[0]}";
+                    $this->correctJpnChars($jpText);
+                    // return fixed text without the prepended jpn char
+                    return substr($jpText, strlen($jpChar));
+                },
+                $text
+            );
         }
     }
 
@@ -459,7 +471,7 @@ class Japanese extends AbstractModule {
      *                                    false = otherwise, but regex is not allowed in $srRepArray]
      * @return none
      */
-    private function replaceConsecutiveJpnChars (MbString &$mbText, &$srRepArray, $ignoreLengthDiff=false) {
+    private function replaceConsecutiveJpnChars (MbString &$mbText, array &$srRepArray, $ignoreLengthDiff=false) {
         $encoding   = &$this->encoding;
         $mbText_len = $mbText->strlen();
         // search consecutive Japanese chars in $mbText
@@ -470,7 +482,7 @@ class Japanese extends AbstractModule {
             // do partial replacements for $mbText
             $jpnString = $mbText->substr($jpnStart, $jpnLength);
             $textLengthDiff = 0; // text length maybe different after replacing
-            foreach ($srRepArray as $sr=> &$rep) {
+            foreach ($srRepArray as $sr => &$rep) {
                 $jpnString = preg_replace("/{$sr}/uimS", $rep, $jpnString, -1, $count);
                 if (!$ignoreLengthDiff) {
                     $textLengthDiff += $count * (
@@ -521,7 +533,7 @@ class Japanese extends AbstractModule {
      * @param  array $array [input array]
      * @return array        [unique values in the input array]
      */
-    private function array_unique_fast ($array) {
+    private function array_unique_fast (array $array) {
         $tmp = [];
         foreach ($array as &$val) $tmp[$val] = true;
         return array_keys($tmp);

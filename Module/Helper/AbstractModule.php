@@ -89,7 +89,7 @@ abstract class AbstractModule {
         $cntArray = [];
         foreach ($keywords as &$keyword) {
             if ($this->isRegex($keyword)) {
-                preg_match_all("/{$keyword}/uimS", $text, $matches);
+                preg_match_all("/{$keyword}/uim", $text, $matches);
                 $cntArray[$keyword] = count($matches[0]);
             } else {
                 $cntArray[$keyword] = substr_count($text, $keyword);
@@ -107,21 +107,21 @@ abstract class AbstractModule {
 
     /**
      * calculate the average value of a given array
-     * @param  array   $a [the given array]
-     * @return number     [the average value]
+     * @param  array  &$array [the given array]
+     * @return number         [the average value]
      */
-    protected function average (array $a) {
-        return array_sum($a) / count($a);
+    protected function average (array &$array) {
+        return array_sum($array) / count($array);
     }
 
     /**
      * calculate the standard deviation of a given array
-     * @param  array   $a      [the given array]
+     * @param  array   &$array [the given array]
      * @param  boolean $sample [true/false = sample/population standard deviation]
      * @return number          [the standard deviation]
      */
-    protected function standardDeviation (array $a, $sample=false) {
-        $n = count($a);
+    protected function standardDeviation (array &$array, $sample=false) {
+        $n = count($array);
         if ($n === 0) {
             trigger_error("The array has no element!", E_USER_WARNING);
             return false;
@@ -130,11 +130,11 @@ abstract class AbstractModule {
             trigger_error("The array has only 1 element!", E_USER_WARNING);
             return false;
         }
-        $mean = array_sum($a) / $n;
+        $mean = array_sum($array) / $n;
         $carry = 0.0;
-        foreach ($a as &$val) {
-            $d = $val - $mean;
-            $carry += $d * $d;
+        foreach ($array as &$val) {
+            $diff = $val - $mean;
+            $carry += $diff * $diff;
         }
         if ($sample) --$n;
         return sqrt($carry / $n);
@@ -142,18 +142,18 @@ abstract class AbstractModule {
 
     /**
      * remove outliers elements from an array
-     * @param  array   $a         [the input array]
+     * @param  array   &$array    [the input array]
      * @param  integer $magnitude [elements should be removed if they out of how many standard deviations?]
      * @return array              [the array with outliers removed]
      */
-    protected function removeOutliers (array $a, $magnitude=1) {
-        $n = count($a);
+    protected function removeOutliers (array &$array, $magnitude=1) {
+        $n = count($array);
         if ($n === 0) return [];
-        $mean = $this->average($a);
+        $mean = $this->average($array);
         // calculate standard deviation and times by magnitude
-        $deviation = $this->standardDeviation($a) * $magnitude;
+        $deviation = $this->standardDeviation($array) * $magnitude;
         // return filtered array of values that lie within $mean +- $deviation.
-        return array_filter($a, function ($x) use (&$mean, &$deviation) {
+        return array_filter($array, function ($x) use (&$mean, &$deviation) {
             return $mean-$deviation < $x && $x < $mean+$deviation;
         });
     }
@@ -166,10 +166,10 @@ abstract class AbstractModule {
      * do not have to be percentages. The values are simply relative to each other. If one value
      * weight was 2, and the other weight of 1, the value with the weight of 2 has about a 66%
      * chance of being selected. Also note that weights should be integers.
-     * @param  array  $array [an array whose values are positive integer weightings]
+     * @param  array &$array [an array whose values are positive integer weightings]
      * @return               [a randomly picked array key]
      */
-    protected function getRandomWeightedElement (array $array) {
+    protected function getRandomWeightedElement (array &$array) {
         $rand = mt_rand(1, (int) array_sum($array));
         foreach ($array as $key => &$weighting) {
             $rand -= $weighting;
