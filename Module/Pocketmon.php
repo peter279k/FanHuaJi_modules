@@ -16,7 +16,7 @@ class Pocketmon extends AbstractModule {
 
     // module info
     public static $info = [
-        'name' => '神奇寶貝',
+        'name' => '精靈寶可夢',
         'desc' => '日本動畫',
     ];
 
@@ -24,6 +24,7 @@ class Pocketmon extends AbstractModule {
         if (!in_array($info->to, ['tw'])) return false;
         if (
             strpos($info->texts['tc'], '寵物小精靈') !== false ||
+            strpos($info->texts['tc'], '精靈寶可夢') !== false ||
             strpos($info->texts['tc'], '小智') !== false ||
             strpos($info->texts['tc'], '皮卡丘') !== false
         ) {
@@ -39,7 +40,8 @@ class Pocketmon extends AbstractModule {
 
     public function conversion_table (ModuleAnalysis &$info) {
         return [
-            '口袋(妖怪|怪[獸物])|(寵物)?小精靈|精靈寶可夢' => '神奇寶貝',
+            '口袋(妖怪|怪[獸物])|寵物小精靈' => '精靈寶可夢',
+            '小精靈' => '寶可夢',
             '精靈球' => '寶貝球',
             '奇異種子' => '妙蛙種子',
             '奇異草' => '妙蛙草',

@@ -51,6 +51,11 @@ class Typo extends AbstractModule {
         '幅(?=模樣|德行)' => '副',
         '([做幹])的([很挺蠻]|還(?![沒])|好(?![事])|漂亮|不錯|如何|怎麼?樣)' => '$1得$2',
 
+        '一本一眼(?=[就看能望]|永恆|[^\s　,，.…。、~～－!！?？;；]*[書])' => '_protect_YiBenYiYan_', // protect "一本一眼"
+        '([看])([^\s　,，.…。、~～－!！?？;；]*)一本一眼' => '$1$2_protect_YiBenYiYan_', // protect "一本一眼"
+        '([了借買偷搶寫搞弄做作])一本一眼' => '$1_protect_YiBenYiYan_', // protect "一本一眼"
+        '一本一眼' => '一板一眼',
+        '_protect_YiBenYiYan_' => '一本一眼', // restore protections
         '一如繼往' => '一如既往',
         '一愁莫展' => '一籌莫展',
         '一摸一樣' => '一模一樣',
