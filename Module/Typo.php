@@ -23,6 +23,7 @@ class Typo extends AbstractModule {
     private static $mapping = [
         '漚心([瀝泣])血' => '嘔心$1血',
         '[優悠]{2}哉哉(?<!悠悠哉哉)' => '悠悠哉哉',
+        '(?<!永保)安康魚' => '鮟鱇魚',
         '為[神蛇]麼' => '為什麼',
         '(?<![原緣起前近遠主成誘肇死病變動來歸功公]|海洛)因該(?![員生名條]|[年月日周週季]|[州洲國省縣市鎮鄉村鄰里]|[信訊]息|視頻|影片)' => '應該',
         '(?<![感直錯幻發察驚警睡懶好視聽嗅味痛自知午著個一大]|鬼不|回籠|先知先|後知後|不知不|一無所)覺的' => '覺得',
@@ -33,6 +34,7 @@ class Typo extends AbstractModule {
         '優哉(?![游遊]哉)' => '悠哉',
         '遭([糕透])' => '糟$1',
         '咽下' => '嚥下',
+        '吞咽' => '吞嚥',
         '(?<![解對表處])決對'=>'絕對',
         '幸([存免])' => '倖$1',
         '([僥])幸' => '$1倖',
@@ -156,7 +158,7 @@ class Typo extends AbstractModule {
     ];
 
     public function load_or_not (ModuleAnalysis &$info) {
-        if (in_array($info->to, ['tw', 'hk'])) return true;
+        if (in_array($info->to, ['tc', 'tw', 'hk'])) return true;
         return false;
     }
 

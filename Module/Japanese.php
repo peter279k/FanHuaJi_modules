@@ -34,7 +34,7 @@ class Japanese extends AbstractModule {
     private $extraKanji = '挨曖宛嵐畏萎椅彙茨咽淫唄鬱怨媛艶旺岡臆俺苛牙瓦楷潰諧崖蓋骸柿顎葛釜鎌韓玩伎亀毀畿臼嗅巾僅錦惧串窟熊詣憬稽隙桁拳鍵舷股虎錮勾梗喉乞傲駒頃痕沙挫采塞埼柵刹拶斬恣摯餌鹿叱嫉腫呪袖羞蹴憧拭尻芯腎須裾凄醒脊戚煎羨腺詮箋膳狙遡曽爽痩踪捉遜汰唾堆戴誰旦綻緻酎貼嘲捗椎爪鶴諦溺塡妬賭藤瞳栃頓貪丼那奈梨謎鍋匂虹捻罵剝箸氾汎阪斑眉膝肘訃阜蔽餅璧蔑哺蜂貌頰睦勃昧枕蜜冥麺冶弥闇喩湧妖瘍沃拉辣藍璃慄侶瞭瑠呂賂弄籠麓脇猿凹渦靴稼拐涯垣殻潟喝褐缶頑挟矯襟隅渓蛍嫌洪溝昆崎皿桟傘肢遮蛇酌汁塾尚宵縄壌唇甚据杉斉逝仙栓挿曹槽藻駄濯棚挑眺釣塚漬亭偵泥搭棟洞凸屯把覇漠肌鉢披扉猫頻瓶雰塀泡俸褒朴僕堀磨抹岬妄厄癒悠羅竜戻枠';
 
     // my own defined text
-    private $extraKanji2    = '坤蝉澤剥碍逢繋尨倶冨巌廼弍彦掴灯焔罸聡蒋遥騨鬪凛撫云瀾涸子丑寅卯辰巳午未申酉戌亥劫芦鮎馴懺棲栖霞祐卐卍痍龍綺訊禄魍魎瓢箪躯蠅倡娼壜罎遙搖謠蒔檗抛祢禰'; // added by myself
+    private $extraKanji2    = '坤蝉澤剥碍逢繋尨倶冨巌廼弍彦掴灯焔罸聡蒋遥騨鬪凛撫云瀾涸子丑寅卯辰巳午未申酉戌亥劫芦鮎馴懺棲栖霞祐卐卍痍龍綺訊禄魍魎瓢箪躯蠅倡娼壜罎遙搖謠蒔檗抛祢禰痒'; // added by myself
     private $kanjiMustBeJpn = '歩両乗亀亜仏仮伝価倹児処剣剤剰労効勅勧勲単厳収営団囲図圧塀塁壊壱売変奨実寛対専巣帯帰庁広廃弐弾従徳応恵悩悪懐戦戻払抜択拝拠拡挙挿捜掲揺摂斉斎暁暦曽栄桜桟検楽様権歓歯歴毎気浄涙渇済渉渓満滝焼猟獣畳発県砕稲穂穏竜粋粛経絵継続総緑縁縄縦繊聴脳荘蔵薬蛍覚観訳読謡豊賛転軽辺逓遅郷酔釈鉄鉱銭鋳錬録関闘陥険隠雑霊頼顕駆騒験髄髪鶏黒黙齢聡凛氷衆浜巌鮎歳値遥';
     private $punctuations   = "\t 　.．…、。~～!！?？·•・×☆★"; // punctuations are considered as Japanese as well
     private $numbers        = "0123456789０１２３４５６７８９#＃%％"; // numbers are considered as Japanese as well
@@ -69,7 +69,7 @@ class Japanese extends AbstractModule {
         '插' => '挿', '揭' => '掲', '摑' => '掴', '擇' => '択', '擔' => '担',
         '擴' => '拡', '攜' => '携', '攝' => '摂', '收' => '収', '數' => '数',
         '斷' => '断', '晝' => '昼', '曬' => '晒', '曾' => '曽', '會' => '会',
-        '條' => '条', '榮' => '栄', '樂' => '楽', '祿' => '禄',
+        '條' => '条', '榮' => '栄', '樂' => '楽', '祿' => '禄', '癢' => '痒',
         '樣' => '様', '橫' => '横', '檢' => '検', '權' => '権', '歐' => '欧',
         '步' => '歩', '歷' => '歴', '歸' => '帰', '殘' => '残', '氣' => '気',
         '沒' => '没', '淒' => '凄', '淚' => '涙', '淨' => '浄', '淺' => '浅',
@@ -374,7 +374,7 @@ class Japanese extends AbstractModule {
 
     // whether load this module?
     public function load_or_not (ModuleAnalysis &$info) {
-        if (!in_array($info->to, ['sc', 'tw', 'hk'])) return false;
+        if (!in_array($info->to, ['sc', 'tc', 'tw', 'hk'])) return false;
         // activate this module if there is a Japanese char
         if (preg_match("/[{$this->mustBeJpn}]/uim", $info->texts['tc'])) return true;
         // activate this module if there is a Japanese-only word
