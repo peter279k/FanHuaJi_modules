@@ -41,7 +41,7 @@ abstract class AbstractModule {
      * @return boolean      [true/false = the given string is/isn't regex]
      */
     protected function isRegex ($str) {
-        return preg_match('/[ \\ ^ $ . \[\] | () ? * + {} ]/uSx', $str) === 1;
+        return strcspn($str, '^$.[]|()?*+{}') < strlen($str);
     }
 
     /**
