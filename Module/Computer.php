@@ -24,7 +24,7 @@ class Computer extends AbstractModule {
     private static $mapping = [
         '(?<![寬恢])宏(?![大觀遠偉])' => '巨集',
         '[制製]表位' => '定位點',
-        '[源原]碼' => '原始碼',
+        '(?<![來])[源原]代?碼(?!賽克)' => '原始碼',
         '保存' => '儲存',
         '全屏幕?' => '全螢幕',
         '剪切' => '剪下',
@@ -99,6 +99,9 @@ class Computer extends AbstractModule {
         '時間線(?![性條])'=>'時間軸',
         '哈希(?![姆])'=>'雜湊',
         '搜索'=>'搜尋',
+        '通配符'=>'萬用字元',
+        '寄存器'=>'暫存器',
+        '(?<![干])預處理器'=>'前處理器',
     ];
 
     public function load_or_not (ModuleAnalysis &$info) {
