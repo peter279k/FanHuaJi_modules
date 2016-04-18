@@ -10,7 +10,11 @@
 [PHP](http://php.net) ≥ 5.6
 
 
-## The MIT License (MIT)
+## License
+
+除非個別檔案內提及其他授權方式，否則使用以下授權方式。
+
+The MIT License (MIT)
 
 Copyright (c) 2015 小斐@2D-Gate &lt;admin@2d-gate.org&gt;
 
