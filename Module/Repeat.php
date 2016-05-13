@@ -27,33 +27,39 @@ class Repeat extends AbstractModule {
     ];
 
     // settings
-    private $encoding = "UTF-8";
-    private $context = 5; // check length for conditionRegex
-    private $punctuationRegex = "/([\t 　,，.。…、!！?？~～\-─－☆★卍卐「」『』【】《》〈〉]+|[\\2a-z\d\\3]+)/uiS";
-    private $convTableBefore = [
-        // search => [replace, conditionRegex]
-        '草泥馬戈壁' => ['操你媽個屄', ''],
-        '草泥馬' => ['操你媽', '草泥馬(?!了)'],
-        '淡定' => ['冷靜', ''],
-        '神馬' => ['什麼', '(?<![匹眼眾諸死戰火風水雷之])神馬'],
-        '甚什麼' => ['什什麼', ''],
-        '臥槽' => ['我操', ''],
-        '家伙' => ['傢伙', ''],
-        '家夥' => ['傢伙', ''],
-        '傢夥' => ['傢伙', ''],
-        '石頭剪刀布' => ['剪刀石頭布', ''],
-        '石頭剪子布' => ['剪刀石頭布', ''],
-        '干幹嘛' => ['幹幹嘛', ''],
-        '痛疼' => ['痛痛', ''],
-        '疼疼疼' => ['痛痛痛', '疼疼疼(?!痛)'],
-    ];
-    private $convTableAfter = [
-        // search => [replace, conditionRege]
-        '衝沖田' => ['沖沖田', ''],
-        '什嗎' => ['什麼', ''],
-        '鬆竹梅' => ['松竹梅', ''],
-        '能行' => ['可以', '(?<![功不可])能行([的]|[阿啊吧呢嗎嘛囉哩嘞吶呀嘎唷呦喲哦喔噢耶]|[\s　]|$)'],
-    ];
+    protected $encoding = "UTF-8";
+    protected $context = 5; // check length for conditionRegex
+    protected $punctuationRegex = "/([\t 　,，.。…、!！?？~～\-─－☆★卍卐「」『』【】《》〈〉]+|[\\2a-z\d\\3]+)/uiS";
+
+    protected function getConvTableBefore () {
+        return [
+            // search => [replace, conditionRegex]
+            '草泥馬戈壁' => ['操你媽個屄', ''],
+            '草泥馬' => ['操你媽', '草泥馬(?!了)'],
+            '淡定' => ['冷靜', ''],
+            '神馬' => ['什麼', '(?<![匹眼眾諸死戰火風水雷之])神馬'],
+            '甚什麼' => ['什什麼', ''],
+            '臥槽' => ['我操', ''],
+            '家伙' => ['傢伙', ''],
+            '家夥' => ['傢伙', ''],
+            '傢夥' => ['傢伙', ''],
+            '石頭剪刀布' => ['剪刀石頭布', ''],
+            '石頭剪子布' => ['剪刀石頭布', ''],
+            '干幹嘛' => ['幹幹嘛', ''],
+            '痛疼' => ['痛痛', ''],
+            '疼疼疼' => ['痛痛痛', '疼疼疼(?!痛)'],
+        ];
+    }
+
+    protected function getConvTableAfter () {
+        return [
+            // search => [replace, conditionRege]
+            '衝沖田' => ['沖沖田', ''],
+            '什嗎' => ['什麼', ''],
+            '鬆竹梅' => ['松竹梅', ''],
+            '能行' => ['可以', "(?<![功不可])能行([的]|[{$this->_modalParticles}]|[\s　]|$)"],
+        ];
+    }
 
     public function load_or_not (ModuleAnalysis &$info) {
         if (!in_array($info->to, ['tw', 'hk'])) return false;
@@ -73,23 +79,23 @@ class Repeat extends AbstractModule {
     public function hookBefore_Taiwanize   (DataInput &$in) { $this->_hookBefore($in); }
     public function hookAfter_Taiwanize    (DataInput &$in) { $this->_hookAfter($in); }
 
-    private function _hookBefore (DataInput &$in) {
+    protected function _hookBefore (DataInput &$in) {
         $this->replaceRepeatPattern(
             $in->text,
-            $this->convTableBefore,
+            $this->getConvTableBefore(),
             $this->context
         );
     }
 
-    private function _hookAfter (DataInput &$in) {
+    protected function _hookAfter (DataInput &$in) {
         $this->replaceRepeatPattern(
             $in->text,
-            $this->convTableAfter,
+            $this->getConvTableAfter(),
             $this->context
         );
     }
 
-    private function replaceRepeatPattern (&$text, array &$convTable, $context) {
+    protected function replaceRepeatPattern (&$text, array $convTable, $context) {
 
         // split text into text parts (even key) and symbol parts (odd key)
         $textSplit = preg_split($this->punctuationRegex, $text, -1, PREG_SPLIT_DELIM_CAPTURE);

@@ -27,6 +27,8 @@ abstract class AbstractModule {
     // trait //
     ///////////
 
+    use DictVariables;
+
     // module info
     public static $info = [
         'name' => 'defaultModuleName',
