@@ -15,7 +15,6 @@ use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
 class Japanese extends AbstractModule {
 
-    // module info
     public static $info = [
         'name' => '日文漢字校正',
         'desc' => '修正日文漢字在繁簡轉換時被誤轉的錯誤',
@@ -296,6 +295,7 @@ class Japanese extends AbstractModule {
         '叁([番])' => '叄$1',
         '灯([す])' => '燈$1',
         '透過(?![し型性])' => '通過',
+        '甦生' => '蘇生',
     ];
     // fix Chinese word to Japanese usage
     protected $fixesChiWord = [
@@ -315,7 +315,7 @@ class Japanese extends AbstractModule {
     // those words are not used in Chinese but in Japanese
     protected $fixesJpnWordUnique = [
         // IMPORTANT: those replacements will be applied in Chinese as well
-        "(?<=^|[\3]|[\s　])(本當|失禮)(?=[\s　]|[?？]|$)",
+        "(?<=^|[\3]|[\s　])(本當)(?=[\s　]|[?？]|$)",
         '([国國]|[电電][话話]|[邮郵]便|[个個法]人|[当當][选選]|[制製商]品|FAX)番[号號]',
         '番[号號]([检檢検]索)',
         '通信([中])?著信',

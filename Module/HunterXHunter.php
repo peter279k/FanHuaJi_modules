@@ -16,7 +16,6 @@ use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
 class HunterXHunter extends AbstractModule {
 
-    // module info
     public static $info = [
         'name' => '獵人',
         'desc' => '日本動畫',

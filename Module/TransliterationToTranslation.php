@@ -14,11 +14,12 @@ use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
 class TransliterationToTranslation extends AbstractModule {
 
-    // module info
     public static $info = [
         'name' => '音譯轉意譯',
         'desc' => '例如：胖次→內褲、歐派→胸部',
     ];
+
+    public static $needToBeForced = self::MODULE_NEED_TO_BE_FORCED_YES;
 
     public function load_or_not (ModuleAnalysis &$info) {
         // you need to force enable this module

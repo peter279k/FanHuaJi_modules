@@ -14,7 +14,6 @@ use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
 class Computer extends AbstractModule {
 
-    // module info
     public static $info = [
         'name' => '電腦詞彙',
         'desc' => '可以用在應用程式的語系檔',
@@ -70,7 +69,8 @@ class Computer extends AbstractModule {
 '頁眉' => '頁首',
 '頁腳' => '頁尾',
 '高級' => '進階',
-'黏貼' => '貼上',
+'黏貼到' => '貼到',
+'黏貼(?![式])' => '貼上',
 '拷貝' => '複製',
 '默認' => '預設',
 '聯機' => '連線',

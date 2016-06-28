@@ -14,7 +14,6 @@ use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
 class Naruto extends AbstractModule {
 
-    // module info
     public static $info = [
         'name' => '火影忍者',
         'desc' => '日本動畫',
@@ -45,7 +44,7 @@ class Naruto extends AbstractModule {
 '渦卷鳴人' => '漩渦鳴人',
 '卡凱西' => '卡卡西',
 '複製忍者' => '拷貝忍者',
-"洛克([．·• 　]*)李" => '李$1洛克',
+"洛克([{$this->_nameDelimiters} 　]*)李" => '李$1洛克',
 '幹柿' => '干柿',
 
         ];

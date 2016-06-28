@@ -7,10 +7,11 @@
 
 namespace XiaoFei\Fanhuaji\Module\Helper;
 
+use XiaoFei\Fanhuaji\Core\Constants;
 use XiaoFei\Fanhuaji\DataType\DataInput;
 use XiaoFei\Fanhuaji\DataType\ModuleAnalysis;
 
-abstract class AbstractModule {
+abstract class AbstractModule implements Constants {
 
     ///////////////
     // interface //
@@ -34,6 +35,9 @@ abstract class AbstractModule {
         'name' => 'defaultModuleName',
         'desc' => 'defaultDescription',
     ];
+
+    // used to indicate module need to be forced enabled or disabled
+    public static $needToBeForced = Constants::MODULE_NEED_TO_BE_FORCED_NO;
 
     /**
      * PSEUDO check a given string is a regex or not

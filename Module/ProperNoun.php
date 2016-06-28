@@ -14,7 +14,6 @@ use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
 class ProperNoun extends AbstractModule {
 
-    // module info
     public static $info = [
         'name' => '專有名詞',
         'desc' => '較具有通用性的人名、地名、片名、遊戲名等等…',
@@ -95,7 +94,7 @@ class ProperNoun extends AbstractModule {
 '守望先鋒' => '鬥陣特攻',
 '寂靜嶺' => '沉默之丘',
 '怪物獵人' => '魔物獵人',
-'最終幻想' => '太空戰士',
+'最終幻想|太空戰士' => 'Final Fantasy', // https://zh.wikipedia.org/wiki/%E6%9C%80%E7%B5%82%E5%B9%BB%E6%83%B3%E7%B3%BB%E5%88%97#.E4.B8.AD.E6.96.87.E8.AF.91.E5.90.8D
 '極品飛車' => '極速快感',
 '泡泡堂' => '爆爆王',
 '爐石傳說' => '爐石戰記',

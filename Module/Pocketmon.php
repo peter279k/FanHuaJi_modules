@@ -14,7 +14,6 @@ use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
 class Pocketmon extends AbstractModule {
 
-    // module info
     public static $info = [
         'name' => '精靈寶可夢',
         'desc' => '日本動畫',

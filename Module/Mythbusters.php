@@ -14,7 +14,6 @@ use XiaoFei\Fanhuaji\Module\Helper\AbstractModule;
 
 class Mythbusters extends AbstractModule {
 
-    // module info
     public static $info = [
         'name' => '流言終結者',
         'desc' => 'Discovery 科普片',
