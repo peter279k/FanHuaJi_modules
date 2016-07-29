@@ -40,9 +40,16 @@ class Pocketmon extends AbstractModule {
     public function conversion_table (ModuleAnalysis &$info) {
         return [
 
+'([火水雷月葉冰]|太陽|仙子)精靈' => '$1_protect_JingLing_', // protect "精靈"
+
 '口袋(妖怪|怪[獸物])|寵物小精靈' => '精靈寶可夢',
 '小精靈' => '寶可夢',
 '精靈球' => '寶貝球',
+'訓練員' => '訓練家',
+
+'精靈(訓練)' => '寶可夢$1',
+'精靈寶可夢訓練' => '寶可夢訓練',
+
 '奇異種子' => '妙蛙種子',
 '奇異草' => '妙蛙草',
 '奇異花' => '妙蛙花',
@@ -141,7 +148,7 @@ class Pocketmon extends AbstractModule {
 '鯉魚龍' => '暴鯉龍',
 '背背龍' => '拉普拉斯',
 '乘龍' => '拉普拉斯',
-'([水雷火]?)(伊貝|精靈)' => '$1伊布',
+'([水雷火]?)(伊貝|精靈(?!寶可夢))' => '$1伊布',
 '立方獸' => '多邊獸',
 '3D龍' => '多邊獸',
 '萬年蟲' => '化石盔',
@@ -171,6 +178,8 @@ class Pocketmon extends AbstractModule {
 '多多冰' => '嘟嘟冰',
 '精靈球菇' => '寶貝球菇',
 '吊燈鬼' => '水晶燈火靈',
+
+'_protect_JingLing_' => '精靈', // restore protections
 
         ];
     }

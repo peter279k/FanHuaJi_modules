@@ -2410,6 +2410,8 @@ class Gundam extends AbstractModule {
 '雙面蟹' => '索克',
 '[雷鐳]射' => '光束',
 
+'浮游[炮砲]' => '感應砲',
+
         ];
     }
 
