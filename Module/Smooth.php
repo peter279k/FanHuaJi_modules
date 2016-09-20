@@ -104,6 +104,7 @@ class Smooth extends AbstractModule {
 "(?<![{$this->_people}]|[就打走跑逃溜滑飛])出故障" => '故障',
 "(不[關干])({$this->_peopleRegex})事" => '$1$2的事',
 "([做幹]出|發生)([一點些了]*)什麼([來了]|[\s　{$this->_punctuations}]|[{$this->_modalParticles}]|的(話|時候)|$)" => '$1$2什麼事$3',
+'基本(?=[也就不會能行還]|可以)' => '基本上',
 
 // add "一" for "個"
 '(?<![一二兩三四五六七八九十百千萬億])個([^\s　]*)(比[方喻])' => '_protect_Ge_$1$2_', // protect "個"
