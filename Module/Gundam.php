@@ -3,7 +3,7 @@
 /**
  * This is a module for FanHuaJi.
  * It's responsible for transforming words about Gundam.
- * @crawler 小斐 <admin@2d-gate.org>
+ * @crawler 小斐 and admin@2d-gate.org
  * @ref https://zh.wikipedia.org/wiki/Template:CGroup/GundamUC
  * @ref https://zh.wikipedia.org/wiki/Template:CGroup/Gundam00
  * @ref https://zh.wikipedia.org/wiki/Template:CGroup/GundamSeed

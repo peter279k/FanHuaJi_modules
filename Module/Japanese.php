@@ -3,7 +3,7 @@
 /**
  * This is a special module for FanHuaJi.
  * It's used to correct Japanese Kanji misconversions.
- * @author 小斐 <admin@2d-gate.org>
+ * @author 小斐 and admin@2d-gate.org
  */
 
 namespace XiaoFei\Fanhuaji\Module;

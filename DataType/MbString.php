@@ -6,7 +6,7 @@
  * Using iconv() to make it UTF-32 and work with substr() is O(1) hence this class.
  * @require libiconv (mostly supplied in modern OS)
  * @version v1.0.1
- * @author 小斐 <admin@2d-gate.org>
+ * @author 小斐 and admin@2d-gate.org
  */
 
 namespace XiaoFei\Fanhuaji\DataType;

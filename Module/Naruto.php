@@ -3,7 +3,7 @@
 /**
  * This is a module for FanHuaJi.
  * It's responsible for transforming words about Naruto.
- * @author 小斐 <admin@2d-gate.org>
+ * @author 小斐 and admin@2d-gate.org
  */
 
 namespace XiaoFei\Fanhuaji\Module;

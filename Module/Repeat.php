@@ -8,7 +8,7 @@
  *   - "草...草...泥~泥~馬~馬" will not be converted
  *     because it becomes "雅雅美美蝶蝶" after removing punctuations
  *     and "雅美蝶" can not be found in the string.
- * @author 小斐 <admin@2d-gate.org>
+ * @author 小斐 and admin@2d-gate.org
  */
 
 namespace XiaoFei\Fanhuaji\Module;

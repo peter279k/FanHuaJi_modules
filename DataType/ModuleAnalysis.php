@@ -2,7 +2,7 @@
 
 /**
  * This class is used to wrap information while doing module analysis.
- * @author 小斐 <admin@2d-gate.org>
+ * @author 小斐 and admin@2d-gate.org
  */
 
 namespace XiaoFei\Fanhuaji\DataType;

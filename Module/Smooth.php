@@ -3,7 +3,7 @@
 /**
  * This is a module for FanHuaJi.
  * It's make a sentence more readable.
- * @author 小斐 <admin@2d-gate.org>
+ * @author 小斐 and admin@2d-gate.org
  */
 
 namespace XiaoFei\Fanhuaji\Module;

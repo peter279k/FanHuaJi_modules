@@ -2,7 +2,7 @@
 
 /**
  * This is class is a standard for a module class.
- * @author 小斐 <admin@2d-gate.org>
+ * @author 小斐 and admin@2d-gate.org
  */
 
 namespace XiaoFei\Fanhuaji\Module\Helper;

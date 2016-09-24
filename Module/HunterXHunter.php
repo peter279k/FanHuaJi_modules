@@ -3,7 +3,7 @@
 /**
  * This is a module for FanHuaJi.
  * It's responsible for transforming words about HunterXHunter.
- * @crawler 小斐 <admin@2d-gate.org>
+ * @crawler 小斐 and admin@2d-gate.org
  * @ref https://zh.wikipedia.org/wiki/Template:CGroup/HUNTER
  * @license https://creativecommons.org/licenses/by-sa/3.0/ [Creative Commons Attribution-ShareAlike 3.0 Unported License]
  */
