@@ -44,6 +44,10 @@ class GanToZuo extends AbstractModule {
 
 // protect
 '(^\s*|[\3])幹(?=[\s　]|$)' => '$1_protect_Gan_',
+"幹([^\s　{$this->_punctuations}]*)([這那哪一兩幾]票)" => '_protect_Gan_$1$2$3',
+"幹不幹([^\s　{$this->_punctuations}]*)([這那哪一兩幾]票)" => '_protect_Gan_不_protect_Gan_$1$2$3',
+"([這那哪一兩幾]票)([^\s　{$this->_punctuations}]*)幹" => '$1$2_protect_Gan_$3',
+"([這那哪一兩幾]票)([^\s　{$this->_punctuations}]*)幹不幹" => '$1$2_protect_Gan_不_protect_Gan_',
 '([被樹對猛實苦])幹' => '$1_protect_Gan_',
 '能幹(?!一?[點些]別的)' => '能_protect_Gan_',
 '幹(?=[線])' => '_protect_Gan_',
