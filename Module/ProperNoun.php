@@ -64,17 +64,20 @@ class ProperNoun extends AbstractModule {
 // 國家、地名
 '九重裡' => '九重里',
 '伯克利' => '柏克萊',
+'克萊斯特徹奇' => '基督城',
 '布[裡里列]塔' => '不列顛',
 '布須曼' => '布希曼',
 '意大利' => '義大利',
+'戛納' => '坎城',
 '文莱' => '汶萊',
 '新西蘭' => '紐西蘭',
 '格林尼治' => '格林威治',
 '百慕大' => '百慕達',
 '老撾' => '寮國',
+'芒特維尤' => '山景城',
 '蘭裡市(?![場集政])' => '蘭里市',
 // 慶典、頒獎
-'(戛納|康城)(國際)?(影展|電影節)' => '坎城影展',
+'(戛納|[康坎]城)(國際)?(影展|電影節)' => '坎城影展',
 // 影視、小說
 '[黑駭]客帝國' => '駭客任務',
 '加勒比海盗' => '神鬼奇航',
@@ -140,6 +143,7 @@ class ProperNoun extends AbstractModule {
         return $this->addSpecialFixes($info, $mapping);
     }
 
+    // This method should be another module I guess...
     protected function addSpecialFixes (ModuleAnalysis &$info, array $mapping) {
         $textHas = function ($needle, $locale='tc') use (&$info) {
             $haystack = &$info->texts[$locale];
@@ -154,6 +158,14 @@ class ProperNoun extends AbstractModule {
         } else {
             $mapping += [ '橙子' => '柳丁' ];
         }
+        // 檯球、乒乓、桌球、撞球
+        if ($textHas('乒乓')) {
+            $mapping += [ '桌球' => '撞球' ];
+        }
+        $mapping += [
+            '[檯臺台]球' => '桌球',
+            '乒乓(?![乓地得])球?' => '桌球',
+        ];
         // 難以判斷轉換例外的學程
         if ($textHas('(?<![當起最])初中')) {
             $mapping += [
